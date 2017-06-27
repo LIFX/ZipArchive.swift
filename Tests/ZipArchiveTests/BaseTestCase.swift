@@ -6,6 +6,7 @@
 //  Copyright © 2016 yaslab. All rights reserved.
 //
 
+import Foundation
 import XCTest
 
 class BaseTestCase: XCTestCase {
@@ -20,6 +21,10 @@ class BaseTestCase: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        
+        #if os(Linux)
+            srand(UInt32(time(nil)))
+        #endif
     }
     
     func cleanUp() throws {
@@ -42,7 +47,7 @@ class BaseTestCase: XCTestCase {
                 return -1
             }
         }
-        
+
         let process = Process.launchedProcess(launchPath: command, arguments: arguments)
         process.waitUntilExit()
         
@@ -59,7 +64,7 @@ class BaseTestCase: XCTestCase {
     
     func createFixedData(size: Int = 1234) -> Data {
         var data = Data()
-        var byte = UInt8(arc4random() % 0x0100)
+        var byte = getRandom()
         for _ in 0 ..< size {
             data.append(&byte, count: 1)
         }
@@ -69,7 +74,7 @@ class BaseTestCase: XCTestCase {
     func createRandomData(size: Int = 1234) -> Data {
         var data = Data()
         for _ in 0 ..< size {
-            var byte = UInt8(arc4random() % 0x0100)
+            var byte = getRandom()
             data.append(&byte, count: 1)
         }
         return data
@@ -91,7 +96,12 @@ class BaseTestCase: XCTestCase {
                     }
                 }
                 else {
-                    if !isDirectory.boolValue {
+                    #if os(Linux)
+                        let _isDirectory: Bool = isDirectory
+                    #else
+                        let _isDirectory: Bool = isDirectory.boolValue
+                    #endif
+                    if !_isDirectory {
                         success = false
                         break
                     }
@@ -112,7 +122,7 @@ class BaseTestCase: XCTestCase {
                 }
                 
                 do {
-                    try data.write(to: URL(fileURLWithPath: stragePath), options: .atomicWrite)
+                    try data.write(to: URL(fileURLWithPath: stragePath), options: .atomic)
                 }
                 catch {
                     success = false
@@ -124,6 +134,14 @@ class BaseTestCase: XCTestCase {
             }
         }
         return success
+    }
+    
+    private func getRandom() -> UInt8 {
+        #if os(Linux)
+            return UInt8(rand() % 0x0100)
+        #else
+            return UInt8(arc4random() % 0x0100)
+        #endif
     }
     
 }
