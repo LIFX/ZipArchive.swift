@@ -37,7 +37,7 @@ struct CZUnzipEntry {
 static CZEntryHeaderRef _CZUnzipEntryReadLocalHeader(CZStreamRef stream, size_t headerOffset, size_t * headerSize) {
     CZEntryHeaderRef _header = CZEntryHeaderCreate();
     
-    int32_t status;
+    swift_int_t status;
     
     status = CZStreamSeek(stream, headerOffset, CZStreamSeekOriginBegin);
     

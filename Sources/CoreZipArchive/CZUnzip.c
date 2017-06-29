@@ -55,7 +55,7 @@ static CZEndOfCentralDirectoryRecordRef _CZUnzipReadEndOfCentralDirectoryRecord(
 }
 
 static CZEndOfCentralDirectoryRecordRef _CZUnzipSearchEndOfCentralDirectoryRecord(CZStreamRef stream) {
-    int32_t status = CZStreamSeek(stream, 0, CZStreamSeekOriginEnd);
+    swift_int_t status = CZStreamSeek(stream, 0, CZStreamSeekOriginEnd);
     if (status < 0) {
         return NULL;
     }
