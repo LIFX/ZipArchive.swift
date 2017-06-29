@@ -9,6 +9,16 @@
 import Foundation
 import CoreZipArchive
 
+extension ObjCBool {
+    
+    #if os(Linux)
+    var boolValue: Bool {
+        return self
+    }
+    #endif
+    
+}
+
 public func getcrc32(path: String) -> UInt32 {
     guard let stream = InputStream(fileAtPath: path) else {
         return 0
