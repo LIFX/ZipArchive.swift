@@ -3,7 +3,16 @@ dist: trusty
 language: generic
 sudo: required
 
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.7
+    packages:
+      - clang-3.7
+
 install:
+  - eval "CC=clang-3.7 && CXX=clang++-3.7"
   - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
 
 script:
