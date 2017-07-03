@@ -79,3 +79,15 @@ public class ZipArchiveStream {
     }
     
 }
+
+extension ZipArchiveStream {
+    
+    public var memoryData: Data? {
+        guard let buf = CZStreamGetMemoryBuffer(ptr) else {
+            return nil
+        }
+        let len = CZStreamGetMemoryBufferLength(ptr)
+        return Data(bytes: buf, count: len)
+    }
+    
+}

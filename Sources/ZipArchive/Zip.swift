@@ -97,3 +97,11 @@ public class Zip {
     }
     
 }
+
+extension Zip {
+    
+    public var memoryData: Data? {
+        return stream.memoryData
+    }
+    
+}
