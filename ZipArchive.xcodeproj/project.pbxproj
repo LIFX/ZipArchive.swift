@@ -1,0 +1,571 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E65B8F21F0A7EF400EA1AB7 /* ZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B8F01F0A7EF400EA1AB7 /* ZipArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0E65B9C21F0A822E00EA1AB7 /* CZArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9831F0A822E00EA1AB7 /* CZArray.c */; };
+		0E65B9C31F0A822E00EA1AB7 /* CZBinaryUtility.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9841F0A822E00EA1AB7 /* CZBinaryUtility.c */; };
+		0E65B9C41F0A822E00EA1AB7 /* CZCompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9851F0A822E00EA1AB7 /* CZCompress.c */; };
+		0E65B9C51F0A822F00EA1AB7 /* CZCompressDeflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9861F0A822E00EA1AB7 /* CZCompressDeflate.c */; };
+		0E65B9C61F0A822F00EA1AB7 /* CZCompressStore.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9871F0A822E00EA1AB7 /* CZCompressStore.c */; };
+		0E65B9C71F0A822F00EA1AB7 /* CZCrypto.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9881F0A822E00EA1AB7 /* CZCrypto.c */; };
+		0E65B9C81F0A822F00EA1AB7 /* CZData.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9891F0A822E00EA1AB7 /* CZData.c */; };
+		0E65B9C91F0A822F00EA1AB7 /* CZDateTime.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B98A1F0A822E00EA1AB7 /* CZDateTime.c */; };
+		0E65B9CA1F0A822F00EA1AB7 /* CZDecompress.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B98B1F0A822E00EA1AB7 /* CZDecompress.c */; };
+		0E65B9CB1F0A822F00EA1AB7 /* CZDecompressDeflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B98C1F0A822E00EA1AB7 /* CZDecompressDeflate.c */; };
+		0E65B9CC1F0A822F00EA1AB7 /* CZDecompressStore.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B98D1F0A822E00EA1AB7 /* CZDecompressStore.c */; };
+		0E65B9CD1F0A822F00EA1AB7 /* CZStream.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B98E1F0A822E00EA1AB7 /* CZStream.c */; };
+		0E65B9CE1F0A822F00EA1AB7 /* CZStreamBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B98F1F0A822E00EA1AB7 /* CZStreamBuffer.c */; };
+		0E65B9CF1F0A822F00EA1AB7 /* CZStreamFile.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9901F0A822E00EA1AB7 /* CZStreamFile.c */; };
+		0E65B9D01F0A822F00EA1AB7 /* CZStreamInMemory.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9911F0A822E00EA1AB7 /* CZStreamInMemory.c */; };
+		0E65B9D11F0A822F00EA1AB7 /* CZTypes.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9921F0A822E00EA1AB7 /* CZTypes.c */; };
+		0E65B9D21F0A822F00EA1AB7 /* CZUnzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9931F0A822E00EA1AB7 /* CZUnzip.c */; };
+		0E65B9D31F0A822F00EA1AB7 /* CZUnzipEntry.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9941F0A822E00EA1AB7 /* CZUnzipEntry.c */; };
+		0E65B9D41F0A822F00EA1AB7 /* CZUtility.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9951F0A822E00EA1AB7 /* CZUtility.c */; };
+		0E65B9D51F0A822F00EA1AB7 /* CZZip.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9961F0A822E00EA1AB7 /* CZZip.c */; };
+		0E65B9D61F0A822F00EA1AB7 /* CZZipEntry.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9971F0A822E00EA1AB7 /* CZZipEntry.c */; };
+		0E65B9D71F0A822F00EA1AB7 /* CoreZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9991F0A822E00EA1AB7 /* CoreZipArchive.h */; };
+		0E65B9D81F0A822F00EA1AB7 /* CZArray_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B99A1F0A822E00EA1AB7 /* CZArray_internal.h */; };
+		0E65B9D91F0A822F00EA1AB7 /* CZBinaryUtility_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B99B1F0A822E00EA1AB7 /* CZBinaryUtility_internal.h */; };
+		0E65B9DA1F0A822F00EA1AB7 /* CZCompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B99C1F0A822E00EA1AB7 /* CZCompress.h */; };
+		0E65B9DB1F0A822F00EA1AB7 /* CZCompressDeflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B99D1F0A822E00EA1AB7 /* CZCompressDeflate.h */; };
+		0E65B9DC1F0A822F00EA1AB7 /* CZCompressStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B99E1F0A822E00EA1AB7 /* CZCompressStore.h */; };
+		0E65B9DD1F0A822F00EA1AB7 /* CZCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B99F1F0A822E00EA1AB7 /* CZCrypto.h */; };
+		0E65B9DE1F0A822F00EA1AB7 /* CZData_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9A01F0A822E00EA1AB7 /* CZData_internal.h */; };
+		0E65B9DF1F0A822F00EA1AB7 /* CZDateTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9A11F0A822E00EA1AB7 /* CZDateTime.h */; };
+		0E65B9E01F0A822F00EA1AB7 /* CZDecompress.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9A21F0A822E00EA1AB7 /* CZDecompress.h */; };
+		0E65B9E11F0A822F00EA1AB7 /* CZDecompressDeflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9A31F0A822E00EA1AB7 /* CZDecompressDeflate.h */; };
+		0E65B9E21F0A822F00EA1AB7 /* CZDecompressStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9A41F0A822E00EA1AB7 /* CZDecompressStore.h */; };
+		0E65B9E31F0A822F00EA1AB7 /* CZStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9A51F0A822E00EA1AB7 /* CZStream.h */; };
+		0E65B9E41F0A822F00EA1AB7 /* CZStream_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9A61F0A822E00EA1AB7 /* CZStream_internal.h */; };
+		0E65B9E51F0A822F00EA1AB7 /* CZStreamBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9A71F0A822E00EA1AB7 /* CZStreamBuffer.h */; };
+		0E65B9E61F0A822F00EA1AB7 /* CZStreamFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9A81F0A822E00EA1AB7 /* CZStreamFile.h */; };
+		0E65B9E71F0A822F00EA1AB7 /* CZStreamInMemory.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9A91F0A822E00EA1AB7 /* CZStreamInMemory.h */; };
+		0E65B9E81F0A822F00EA1AB7 /* CZTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9AA1F0A822E00EA1AB7 /* CZTypes.h */; };
+		0E65B9E91F0A822F00EA1AB7 /* CZTypes_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9AB1F0A822E00EA1AB7 /* CZTypes_internal.h */; };
+		0E65B9EA1F0A822F00EA1AB7 /* CZUnzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9AC1F0A822E00EA1AB7 /* CZUnzip.h */; };
+		0E65B9EB1F0A822F00EA1AB7 /* CZUnzip_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9AD1F0A822E00EA1AB7 /* CZUnzip_internal.h */; };
+		0E65B9EC1F0A822F00EA1AB7 /* CZUnzipEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9AE1F0A822E00EA1AB7 /* CZUnzipEntry.h */; };
+		0E65B9ED1F0A822F00EA1AB7 /* CZUnzipEntry_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9AF1F0A822E00EA1AB7 /* CZUnzipEntry_internal.h */; };
+		0E65B9EE1F0A822F00EA1AB7 /* CZUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9B01F0A822E00EA1AB7 /* CZUtility.h */; };
+		0E65B9EF1F0A822F00EA1AB7 /* CZZip.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9B11F0A822E00EA1AB7 /* CZZip.h */; };
+		0E65B9F01F0A822F00EA1AB7 /* CZZip_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9B21F0A822E00EA1AB7 /* CZZip_internal.h */; };
+		0E65B9F11F0A822F00EA1AB7 /* CZZipEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9B31F0A822E00EA1AB7 /* CZZipEntry.h */; };
+		0E65B9F21F0A822F00EA1AB7 /* CZZipEntry_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B9B41F0A822E00EA1AB7 /* CZZipEntry_internal.h */; };
+		0E65B9F31F0A822F00EA1AB7 /* CompressionLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9B71F0A822E00EA1AB7 /* CompressionLevel.swift */; };
+		0E65B9F41F0A822F00EA1AB7 /* CompressionMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9B81F0A822E00EA1AB7 /* CompressionMethod.swift */; };
+		0E65B9F51F0A822F00EA1AB7 /* EntryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9B91F0A822E00EA1AB7 /* EntryHeader.swift */; };
+		0E65B9F61F0A822F00EA1AB7 /* LocalEntryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BA1F0A822E00EA1AB7 /* LocalEntryHeader.swift */; };
+		0E65B9F71F0A822F00EA1AB7 /* Unzip+ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BB1F0A822E00EA1AB7 /* Unzip+ZipFile.swift */; };
+		0E65B9F81F0A822F00EA1AB7 /* Unzip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BC1F0A822E00EA1AB7 /* Unzip.swift */; };
+		0E65B9F91F0A822F00EA1AB7 /* Zip+ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BD1F0A822E00EA1AB7 /* Zip+ZipFile.swift */; };
+		0E65B9FA1F0A822F00EA1AB7 /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BE1F0A822E00EA1AB7 /* Zip.swift */; };
+		0E65B9FB1F0A822F00EA1AB7 /* ZipArchiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BF1F0A822E00EA1AB7 /* ZipArchiveStream.swift */; };
+		0E65B9FC1F0A822F00EA1AB7 /* ZipConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9C01F0A822E00EA1AB7 /* ZipConstants.swift */; };
+		0E65B9FD1F0A822F00EA1AB7 /* ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9C11F0A822E00EA1AB7 /* ZipFile.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0E65B8ED1F0A7EF400EA1AB7 /* ZipArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZipArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E65B8F01F0A7EF400EA1AB7 /* ZipArchive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		0E65B8F11F0A7EF400EA1AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E65B9831F0A822E00EA1AB7 /* CZArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZArray.c; sourceTree = "<group>"; };
+		0E65B9841F0A822E00EA1AB7 /* CZBinaryUtility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZBinaryUtility.c; sourceTree = "<group>"; };
+		0E65B9851F0A822E00EA1AB7 /* CZCompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZCompress.c; sourceTree = "<group>"; };
+		0E65B9861F0A822E00EA1AB7 /* CZCompressDeflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZCompressDeflate.c; sourceTree = "<group>"; };
+		0E65B9871F0A822E00EA1AB7 /* CZCompressStore.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZCompressStore.c; sourceTree = "<group>"; };
+		0E65B9881F0A822E00EA1AB7 /* CZCrypto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZCrypto.c; sourceTree = "<group>"; };
+		0E65B9891F0A822E00EA1AB7 /* CZData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZData.c; sourceTree = "<group>"; };
+		0E65B98A1F0A822E00EA1AB7 /* CZDateTime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZDateTime.c; sourceTree = "<group>"; };
+		0E65B98B1F0A822E00EA1AB7 /* CZDecompress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZDecompress.c; sourceTree = "<group>"; };
+		0E65B98C1F0A822E00EA1AB7 /* CZDecompressDeflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZDecompressDeflate.c; sourceTree = "<group>"; };
+		0E65B98D1F0A822E00EA1AB7 /* CZDecompressStore.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZDecompressStore.c; sourceTree = "<group>"; };
+		0E65B98E1F0A822E00EA1AB7 /* CZStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZStream.c; sourceTree = "<group>"; };
+		0E65B98F1F0A822E00EA1AB7 /* CZStreamBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZStreamBuffer.c; sourceTree = "<group>"; };
+		0E65B9901F0A822E00EA1AB7 /* CZStreamFile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZStreamFile.c; sourceTree = "<group>"; };
+		0E65B9911F0A822E00EA1AB7 /* CZStreamInMemory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZStreamInMemory.c; sourceTree = "<group>"; };
+		0E65B9921F0A822E00EA1AB7 /* CZTypes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZTypes.c; sourceTree = "<group>"; };
+		0E65B9931F0A822E00EA1AB7 /* CZUnzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZUnzip.c; sourceTree = "<group>"; };
+		0E65B9941F0A822E00EA1AB7 /* CZUnzipEntry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZUnzipEntry.c; sourceTree = "<group>"; };
+		0E65B9951F0A822E00EA1AB7 /* CZUtility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZUtility.c; sourceTree = "<group>"; };
+		0E65B9961F0A822E00EA1AB7 /* CZZip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZZip.c; sourceTree = "<group>"; };
+		0E65B9971F0A822E00EA1AB7 /* CZZipEntry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CZZipEntry.c; sourceTree = "<group>"; };
+		0E65B9991F0A822E00EA1AB7 /* CoreZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreZipArchive.h; sourceTree = "<group>"; };
+		0E65B99A1F0A822E00EA1AB7 /* CZArray_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZArray_internal.h; sourceTree = "<group>"; };
+		0E65B99B1F0A822E00EA1AB7 /* CZBinaryUtility_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZBinaryUtility_internal.h; sourceTree = "<group>"; };
+		0E65B99C1F0A822E00EA1AB7 /* CZCompress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZCompress.h; sourceTree = "<group>"; };
+		0E65B99D1F0A822E00EA1AB7 /* CZCompressDeflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZCompressDeflate.h; sourceTree = "<group>"; };
+		0E65B99E1F0A822E00EA1AB7 /* CZCompressStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZCompressStore.h; sourceTree = "<group>"; };
+		0E65B99F1F0A822E00EA1AB7 /* CZCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZCrypto.h; sourceTree = "<group>"; };
+		0E65B9A01F0A822E00EA1AB7 /* CZData_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZData_internal.h; sourceTree = "<group>"; };
+		0E65B9A11F0A822E00EA1AB7 /* CZDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZDateTime.h; sourceTree = "<group>"; };
+		0E65B9A21F0A822E00EA1AB7 /* CZDecompress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZDecompress.h; sourceTree = "<group>"; };
+		0E65B9A31F0A822E00EA1AB7 /* CZDecompressDeflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZDecompressDeflate.h; sourceTree = "<group>"; };
+		0E65B9A41F0A822E00EA1AB7 /* CZDecompressStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZDecompressStore.h; sourceTree = "<group>"; };
+		0E65B9A51F0A822E00EA1AB7 /* CZStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZStream.h; sourceTree = "<group>"; };
+		0E65B9A61F0A822E00EA1AB7 /* CZStream_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZStream_internal.h; sourceTree = "<group>"; };
+		0E65B9A71F0A822E00EA1AB7 /* CZStreamBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZStreamBuffer.h; sourceTree = "<group>"; };
+		0E65B9A81F0A822E00EA1AB7 /* CZStreamFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZStreamFile.h; sourceTree = "<group>"; };
+		0E65B9A91F0A822E00EA1AB7 /* CZStreamInMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZStreamInMemory.h; sourceTree = "<group>"; };
+		0E65B9AA1F0A822E00EA1AB7 /* CZTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZTypes.h; sourceTree = "<group>"; };
+		0E65B9AB1F0A822E00EA1AB7 /* CZTypes_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZTypes_internal.h; sourceTree = "<group>"; };
+		0E65B9AC1F0A822E00EA1AB7 /* CZUnzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZUnzip.h; sourceTree = "<group>"; };
+		0E65B9AD1F0A822E00EA1AB7 /* CZUnzip_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZUnzip_internal.h; sourceTree = "<group>"; };
+		0E65B9AE1F0A822E00EA1AB7 /* CZUnzipEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZUnzipEntry.h; sourceTree = "<group>"; };
+		0E65B9AF1F0A822E00EA1AB7 /* CZUnzipEntry_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZUnzipEntry_internal.h; sourceTree = "<group>"; };
+		0E65B9B01F0A822E00EA1AB7 /* CZUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZUtility.h; sourceTree = "<group>"; };
+		0E65B9B11F0A822E00EA1AB7 /* CZZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZZip.h; sourceTree = "<group>"; };
+		0E65B9B21F0A822E00EA1AB7 /* CZZip_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZZip_internal.h; sourceTree = "<group>"; };
+		0E65B9B31F0A822E00EA1AB7 /* CZZipEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZZipEntry.h; sourceTree = "<group>"; };
+		0E65B9B41F0A822E00EA1AB7 /* CZZipEntry_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZZipEntry_internal.h; sourceTree = "<group>"; };
+		0E65B9B51F0A822E00EA1AB7 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		0E65B9B71F0A822E00EA1AB7 /* CompressionLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompressionLevel.swift; sourceTree = "<group>"; };
+		0E65B9B81F0A822E00EA1AB7 /* CompressionMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompressionMethod.swift; sourceTree = "<group>"; };
+		0E65B9B91F0A822E00EA1AB7 /* EntryHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryHeader.swift; sourceTree = "<group>"; };
+		0E65B9BA1F0A822E00EA1AB7 /* LocalEntryHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalEntryHeader.swift; sourceTree = "<group>"; };
+		0E65B9BB1F0A822E00EA1AB7 /* Unzip+ZipFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Unzip+ZipFile.swift"; sourceTree = "<group>"; };
+		0E65B9BC1F0A822E00EA1AB7 /* Unzip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unzip.swift; sourceTree = "<group>"; };
+		0E65B9BD1F0A822E00EA1AB7 /* Zip+ZipFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Zip+ZipFile.swift"; sourceTree = "<group>"; };
+		0E65B9BE1F0A822E00EA1AB7 /* Zip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zip.swift; sourceTree = "<group>"; };
+		0E65B9BF1F0A822E00EA1AB7 /* ZipArchiveStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipArchiveStream.swift; sourceTree = "<group>"; };
+		0E65B9C01F0A822E00EA1AB7 /* ZipConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipConstants.swift; sourceTree = "<group>"; };
+		0E65B9C11F0A822E00EA1AB7 /* ZipFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipFile.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0E65B8E91F0A7EF400EA1AB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E65B8E31F0A7EF400EA1AB7 = {
+			isa = PBXGroup;
+			children = (
+				0E65B8EF1F0A7EF400EA1AB7 /* ZipArchive */,
+				0E65B8EE1F0A7EF400EA1AB7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0E65B8EE1F0A7EF400EA1AB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0E65B8ED1F0A7EF400EA1AB7 /* ZipArchive.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0E65B8EF1F0A7EF400EA1AB7 /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				0E65B9821F0A822E00EA1AB7 /* CoreZipArchive */,
+				0E65B9B61F0A822E00EA1AB7 /* ZipArchive */,
+				0E65B8F01F0A7EF400EA1AB7 /* ZipArchive.h */,
+				0E65B8F11F0A7EF400EA1AB7 /* Info.plist */,
+			);
+			path = ZipArchive;
+			sourceTree = "<group>";
+		};
+		0E65B9821F0A822E00EA1AB7 /* CoreZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				0E65B9831F0A822E00EA1AB7 /* CZArray.c */,
+				0E65B9841F0A822E00EA1AB7 /* CZBinaryUtility.c */,
+				0E65B9851F0A822E00EA1AB7 /* CZCompress.c */,
+				0E65B9861F0A822E00EA1AB7 /* CZCompressDeflate.c */,
+				0E65B9871F0A822E00EA1AB7 /* CZCompressStore.c */,
+				0E65B9881F0A822E00EA1AB7 /* CZCrypto.c */,
+				0E65B9891F0A822E00EA1AB7 /* CZData.c */,
+				0E65B98A1F0A822E00EA1AB7 /* CZDateTime.c */,
+				0E65B98B1F0A822E00EA1AB7 /* CZDecompress.c */,
+				0E65B98C1F0A822E00EA1AB7 /* CZDecompressDeflate.c */,
+				0E65B98D1F0A822E00EA1AB7 /* CZDecompressStore.c */,
+				0E65B98E1F0A822E00EA1AB7 /* CZStream.c */,
+				0E65B98F1F0A822E00EA1AB7 /* CZStreamBuffer.c */,
+				0E65B9901F0A822E00EA1AB7 /* CZStreamFile.c */,
+				0E65B9911F0A822E00EA1AB7 /* CZStreamInMemory.c */,
+				0E65B9921F0A822E00EA1AB7 /* CZTypes.c */,
+				0E65B9931F0A822E00EA1AB7 /* CZUnzip.c */,
+				0E65B9941F0A822E00EA1AB7 /* CZUnzipEntry.c */,
+				0E65B9951F0A822E00EA1AB7 /* CZUtility.c */,
+				0E65B9961F0A822E00EA1AB7 /* CZZip.c */,
+				0E65B9971F0A822E00EA1AB7 /* CZZipEntry.c */,
+				0E65B9981F0A822E00EA1AB7 /* include */,
+			);
+			name = CoreZipArchive;
+			path = Sources/CoreZipArchive;
+			sourceTree = SOURCE_ROOT;
+		};
+		0E65B9981F0A822E00EA1AB7 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				0E65B9991F0A822E00EA1AB7 /* CoreZipArchive.h */,
+				0E65B99A1F0A822E00EA1AB7 /* CZArray_internal.h */,
+				0E65B99B1F0A822E00EA1AB7 /* CZBinaryUtility_internal.h */,
+				0E65B99C1F0A822E00EA1AB7 /* CZCompress.h */,
+				0E65B99D1F0A822E00EA1AB7 /* CZCompressDeflate.h */,
+				0E65B99E1F0A822E00EA1AB7 /* CZCompressStore.h */,
+				0E65B99F1F0A822E00EA1AB7 /* CZCrypto.h */,
+				0E65B9A01F0A822E00EA1AB7 /* CZData_internal.h */,
+				0E65B9A11F0A822E00EA1AB7 /* CZDateTime.h */,
+				0E65B9A21F0A822E00EA1AB7 /* CZDecompress.h */,
+				0E65B9A31F0A822E00EA1AB7 /* CZDecompressDeflate.h */,
+				0E65B9A41F0A822E00EA1AB7 /* CZDecompressStore.h */,
+				0E65B9A51F0A822E00EA1AB7 /* CZStream.h */,
+				0E65B9A61F0A822E00EA1AB7 /* CZStream_internal.h */,
+				0E65B9A71F0A822E00EA1AB7 /* CZStreamBuffer.h */,
+				0E65B9A81F0A822E00EA1AB7 /* CZStreamFile.h */,
+				0E65B9A91F0A822E00EA1AB7 /* CZStreamInMemory.h */,
+				0E65B9AA1F0A822E00EA1AB7 /* CZTypes.h */,
+				0E65B9AB1F0A822E00EA1AB7 /* CZTypes_internal.h */,
+				0E65B9AC1F0A822E00EA1AB7 /* CZUnzip.h */,
+				0E65B9AD1F0A822E00EA1AB7 /* CZUnzip_internal.h */,
+				0E65B9AE1F0A822E00EA1AB7 /* CZUnzipEntry.h */,
+				0E65B9AF1F0A822E00EA1AB7 /* CZUnzipEntry_internal.h */,
+				0E65B9B01F0A822E00EA1AB7 /* CZUtility.h */,
+				0E65B9B11F0A822E00EA1AB7 /* CZZip.h */,
+				0E65B9B21F0A822E00EA1AB7 /* CZZip_internal.h */,
+				0E65B9B31F0A822E00EA1AB7 /* CZZipEntry.h */,
+				0E65B9B41F0A822E00EA1AB7 /* CZZipEntry_internal.h */,
+				0E65B9B51F0A822E00EA1AB7 /* module.modulemap */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		0E65B9B61F0A822E00EA1AB7 /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				0E65B9B71F0A822E00EA1AB7 /* CompressionLevel.swift */,
+				0E65B9B81F0A822E00EA1AB7 /* CompressionMethod.swift */,
+				0E65B9B91F0A822E00EA1AB7 /* EntryHeader.swift */,
+				0E65B9BA1F0A822E00EA1AB7 /* LocalEntryHeader.swift */,
+				0E65B9BB1F0A822E00EA1AB7 /* Unzip+ZipFile.swift */,
+				0E65B9BC1F0A822E00EA1AB7 /* Unzip.swift */,
+				0E65B9BD1F0A822E00EA1AB7 /* Zip+ZipFile.swift */,
+				0E65B9BE1F0A822E00EA1AB7 /* Zip.swift */,
+				0E65B9BF1F0A822E00EA1AB7 /* ZipArchiveStream.swift */,
+				0E65B9C01F0A822E00EA1AB7 /* ZipConstants.swift */,
+				0E65B9C11F0A822E00EA1AB7 /* ZipFile.swift */,
+			);
+			name = ZipArchive;
+			path = Sources/ZipArchive;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0E65B8EA1F0A7EF400EA1AB7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E65B9DA1F0A822F00EA1AB7 /* CZCompress.h in Headers */,
+				0E65B9EE1F0A822F00EA1AB7 /* CZUtility.h in Headers */,
+				0E65B9E41F0A822F00EA1AB7 /* CZStream_internal.h in Headers */,
+				0E65B9DC1F0A822F00EA1AB7 /* CZCompressStore.h in Headers */,
+				0E65B9E71F0A822F00EA1AB7 /* CZStreamInMemory.h in Headers */,
+				0E65B9D71F0A822F00EA1AB7 /* CoreZipArchive.h in Headers */,
+				0E65B9EB1F0A822F00EA1AB7 /* CZUnzip_internal.h in Headers */,
+				0E65B9ED1F0A822F00EA1AB7 /* CZUnzipEntry_internal.h in Headers */,
+				0E65B9F01F0A822F00EA1AB7 /* CZZip_internal.h in Headers */,
+				0E65B9EA1F0A822F00EA1AB7 /* CZUnzip.h in Headers */,
+				0E65B8F21F0A7EF400EA1AB7 /* ZipArchive.h in Headers */,
+				0E65B9E61F0A822F00EA1AB7 /* CZStreamFile.h in Headers */,
+				0E65B9F11F0A822F00EA1AB7 /* CZZipEntry.h in Headers */,
+				0E65B9DF1F0A822F00EA1AB7 /* CZDateTime.h in Headers */,
+				0E65B9D91F0A822F00EA1AB7 /* CZBinaryUtility_internal.h in Headers */,
+				0E65B9D81F0A822F00EA1AB7 /* CZArray_internal.h in Headers */,
+				0E65B9DE1F0A822F00EA1AB7 /* CZData_internal.h in Headers */,
+				0E65B9E51F0A822F00EA1AB7 /* CZStreamBuffer.h in Headers */,
+				0E65B9DD1F0A822F00EA1AB7 /* CZCrypto.h in Headers */,
+				0E65B9EF1F0A822F00EA1AB7 /* CZZip.h in Headers */,
+				0E65B9DB1F0A822F00EA1AB7 /* CZCompressDeflate.h in Headers */,
+				0E65B9E21F0A822F00EA1AB7 /* CZDecompressStore.h in Headers */,
+				0E65B9E31F0A822F00EA1AB7 /* CZStream.h in Headers */,
+				0E65B9E81F0A822F00EA1AB7 /* CZTypes.h in Headers */,
+				0E65B9E11F0A822F00EA1AB7 /* CZDecompressDeflate.h in Headers */,
+				0E65B9E91F0A822F00EA1AB7 /* CZTypes_internal.h in Headers */,
+				0E65B9EC1F0A822F00EA1AB7 /* CZUnzipEntry.h in Headers */,
+				0E65B9F21F0A822F00EA1AB7 /* CZZipEntry_internal.h in Headers */,
+				0E65B9E01F0A822F00EA1AB7 /* CZDecompress.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0E65B8EC1F0A7EF400EA1AB7 /* ZipArchive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0E65B8F51F0A7EF400EA1AB7 /* Build configuration list for PBXNativeTarget "ZipArchive" */;
+			buildPhases = (
+				0E65B8E81F0A7EF400EA1AB7 /* Sources */,
+				0E65B8E91F0A7EF400EA1AB7 /* Frameworks */,
+				0E65B8EA1F0A7EF400EA1AB7 /* Headers */,
+				0E65B8EB1F0A7EF400EA1AB7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZipArchive;
+			productName = ZipArchive;
+			productReference = 0E65B8ED1F0A7EF400EA1AB7 /* ZipArchive.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0E65B8E41F0A7EF400EA1AB7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = yaslab;
+				TargetAttributes = {
+					0E65B8EC1F0A7EF400EA1AB7 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0E65B8E71F0A7EF400EA1AB7 /* Build configuration list for PBXProject "ZipArchive" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0E65B8E31F0A7EF400EA1AB7;
+			productRefGroup = 0E65B8EE1F0A7EF400EA1AB7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0E65B8EC1F0A7EF400EA1AB7 /* ZipArchive */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0E65B8EB1F0A7EF400EA1AB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0E65B8E81F0A7EF400EA1AB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E65B9C81F0A822F00EA1AB7 /* CZData.c in Sources */,
+				0E65B9CA1F0A822F00EA1AB7 /* CZDecompress.c in Sources */,
+				0E65B9D01F0A822F00EA1AB7 /* CZStreamInMemory.c in Sources */,
+				0E65B9CE1F0A822F00EA1AB7 /* CZStreamBuffer.c in Sources */,
+				0E65B9C61F0A822F00EA1AB7 /* CZCompressStore.c in Sources */,
+				0E65B9CF1F0A822F00EA1AB7 /* CZStreamFile.c in Sources */,
+				0E65B9F61F0A822F00EA1AB7 /* LocalEntryHeader.swift in Sources */,
+				0E65B9C71F0A822F00EA1AB7 /* CZCrypto.c in Sources */,
+				0E65B9FC1F0A822F00EA1AB7 /* ZipConstants.swift in Sources */,
+				0E65B9D21F0A822F00EA1AB7 /* CZUnzip.c in Sources */,
+				0E65B9D51F0A822F00EA1AB7 /* CZZip.c in Sources */,
+				0E65B9F81F0A822F00EA1AB7 /* Unzip.swift in Sources */,
+				0E65B9F71F0A822F00EA1AB7 /* Unzip+ZipFile.swift in Sources */,
+				0E65B9FB1F0A822F00EA1AB7 /* ZipArchiveStream.swift in Sources */,
+				0E65B9C41F0A822E00EA1AB7 /* CZCompress.c in Sources */,
+				0E65B9CC1F0A822F00EA1AB7 /* CZDecompressStore.c in Sources */,
+				0E65B9D31F0A822F00EA1AB7 /* CZUnzipEntry.c in Sources */,
+				0E65B9FA1F0A822F00EA1AB7 /* Zip.swift in Sources */,
+				0E65B9C31F0A822E00EA1AB7 /* CZBinaryUtility.c in Sources */,
+				0E65B9C51F0A822F00EA1AB7 /* CZCompressDeflate.c in Sources */,
+				0E65B9D41F0A822F00EA1AB7 /* CZUtility.c in Sources */,
+				0E65B9CD1F0A822F00EA1AB7 /* CZStream.c in Sources */,
+				0E65B9F41F0A822F00EA1AB7 /* CompressionMethod.swift in Sources */,
+				0E65B9D61F0A822F00EA1AB7 /* CZZipEntry.c in Sources */,
+				0E65B9D11F0A822F00EA1AB7 /* CZTypes.c in Sources */,
+				0E65B9C21F0A822E00EA1AB7 /* CZArray.c in Sources */,
+				0E65B9F31F0A822F00EA1AB7 /* CompressionLevel.swift in Sources */,
+				0E65B9FD1F0A822F00EA1AB7 /* ZipFile.swift in Sources */,
+				0E65B9C91F0A822F00EA1AB7 /* CZDateTime.c in Sources */,
+				0E65B9F91F0A822F00EA1AB7 /* Zip+ZipFile.swift in Sources */,
+				0E65B9CB1F0A822F00EA1AB7 /* CZDecompressDeflate.c in Sources */,
+				0E65B9F51F0A822F00EA1AB7 /* EntryHeader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0E65B8F31F0A7EF400EA1AB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0E65B8F41F0A7EF400EA1AB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		0E65B8F61F0A7EF400EA1AB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ZipArchive/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.yaslab.ZipArchive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Sources/CoreZipArchive/include";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		0E65B8F71F0A7EF400EA1AB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ZipArchive/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.yaslab.ZipArchive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Sources/CoreZipArchive/include";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0E65B8E71F0A7EF400EA1AB7 /* Build configuration list for PBXProject "ZipArchive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E65B8F31F0A7EF400EA1AB7 /* Debug */,
+				0E65B8F41F0A7EF400EA1AB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0E65B8F51F0A7EF400EA1AB7 /* Build configuration list for PBXNativeTarget "ZipArchive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E65B8F61F0A7EF400EA1AB7 /* Debug */,
+				0E65B8F71F0A7EF400EA1AB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0E65B8E41F0A7EF400EA1AB7 /* Project object */;
+}
