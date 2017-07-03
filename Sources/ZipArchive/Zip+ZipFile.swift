@@ -42,6 +42,48 @@ public func getcrc32(path: String) -> UInt32 {
 }
 
 extension Zip {
+    
+    public func appendEntry(fromData data: Data, entryName: String, isDirectory: Bool = false, method: CompressionMethod = .deflate, level: CompressionLevel = .optimal, password: String? = nil) throws {
+        var name = entryName
+        var method = method
+        var level = level
+        var cstrPass: [CChar]? = nil
+        var crc32: UInt32 = 0
+        if isDirectory {
+            if !name.hasSuffix("/") {
+                name += "/"
+            }
+            method = .store
+            level = .noCompression
+        } else {
+            if let password = password {
+                cstrPass = password.cString(using: .ascii)
+                if cstrPass == nil {
+                    throw ZipError.stringEncodingMismatch
+                }
+            }
+            let count = UInt32(data.count)
+            crc32 = data.withUnsafeBytes { (bytes: UnsafePointer<UInt8>) in
+                return UInt32(CoreZipArchive.crc32(0, bytes, count))
+            }
+        }
+        
+        let entry = self.appendEntry(name, method: method, level: level, password: password, crc32: crc32)
+        
+        if isDirectory {
+            // Do Nothing
+        } else {
+            let count = data.count
+            let len = data.withUnsafeBytes { (bytes: UnsafePointer<UInt8>) in
+                return entry.write(bytes, count: count)
+            }
+            if len != count {
+                throw ZipError.io
+            }
+        }
+        
+        entry.close()
+    }
 
     public func appendEntry(fromFileAtPath path: String, entryName: String, method: CompressionMethod = .deflate, level: CompressionLevel = .optimal, password: String? = nil) throws {
         let fileManager = FileManager.default

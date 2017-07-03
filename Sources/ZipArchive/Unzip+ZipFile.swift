@@ -69,6 +69,24 @@ extension Unzip {
 }
 
 extension Unzip.Entry {
+    
+    public func extractToData() throws -> Data {
+        var data = Data()
+        var _buffer = [UInt8](repeating: 0, count: DefaultBufferSize)
+        try _buffer.withUnsafeMutableBufferPointer { (buffer) -> Void in
+            while true {
+                let readLen = self.read(buffer.baseAddress!, count: buffer.count)
+                if readLen < 0 {
+                    throw ZipError.io
+                }
+                if readLen == 0 {
+                    break
+                }
+                data.append(buffer.baseAddress!, count: readLen)
+            }
+        }
+        return data
+    }
 
     public func extract(toFileAtPath path: String, overwrite: Bool = false) throws {
         let fileManager = FileManager.default
