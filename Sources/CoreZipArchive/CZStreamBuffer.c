@@ -46,10 +46,6 @@ size_t _CZStreamBufferWrite(void * opaque, const uint8_t * buffer, size_t count)
 
 swift_int_t _CZStreamBufferSeek(void * opaque, int64_t offset, CZStreamSeekOrigin origin) {
     CZStreamBufferData * data = opaque;
-    int64_t maxOffset = 0;
-    if (data->capacity > 0) {
-        maxOffset = data->capacity - 1;
-    }
     int64_t newOffset = 0;
     switch (origin) {
         case CZStreamSeekOriginBegin:
@@ -59,12 +55,12 @@ swift_int_t _CZStreamBufferSeek(void * opaque, int64_t offset, CZStreamSeekOrigi
             newOffset = data->position + offset;
             break;
         case CZStreamSeekOriginEnd:
-            newOffset = maxOffset + offset;
+            newOffset = data->capacity + offset;
             break;
         default:
             return -1;
     }
-    if (newOffset < 0 || newOffset > maxOffset) {
+    if (newOffset < 0 || newOffset > data->capacity) {
         //EINVAL
         return -1;
     }
