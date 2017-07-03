@@ -13,14 +13,14 @@
 typedef struct {
     
     void * bytes;
-    size_t length;
-    size_t position;
+    int64_t length;
+    int64_t position;
 
 } CZStreamInMemoryData;
 
 // MARK: - private
 
-static void _CZStreamInMemoryDataAllocate(CZStreamInMemoryData * data, size_t size) {
+static void _CZStreamInMemoryDataAllocate(CZStreamInMemoryData * data, int64_t size) {
     if (data->bytes == NULL) {
         data->bytes = malloc(size);
         data->length = size;
@@ -28,7 +28,7 @@ static void _CZStreamInMemoryDataAllocate(CZStreamInMemoryData * data, size_t si
         return;
     }
     if ((data->length - data->position) < size) {
-        size_t newLength = data->position + size;
+        int64_t newLength = data->position + size;
         void * ptr = realloc(data->bytes, newLength);
         if (ptr == NULL) {
             // TODO: Error
@@ -59,7 +59,7 @@ size_t _CZStreamInMemoryRead(void * opaque, uint8_t * buffer, size_t count) {
 
 size_t _CZStreamInMemoryWrite(void * opaque, const uint8_t * buffer, size_t count) {
     CZStreamInMemoryData * data = opaque;
-    _CZStreamInMemoryDataAllocate(data, count);
+    _CZStreamInMemoryDataAllocate(data, (int64_t)count);
     memcpy(data->bytes + data->position, buffer, count);
     data->position += count;
     return count;
