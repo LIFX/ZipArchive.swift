@@ -48,8 +48,10 @@ static CZEndOfCentralDirectoryRecordRef _CZUnzipReadEndOfCentralDirectoryRecord(
     CZEndOfCentralDirectoryRecordSetInfo(record, info);
     
     uint16_t fileCommentLength = CZBinaryReadUInt16LE(buffer + offset, &offset);
-    CZEndOfCentralDirectoryRecordSetFileCommnet(record, (const char *)(buffer + offset), fileCommentLength);
-    offset += fileCommentLength;
+    if (fileCommentLength > 0) {
+        CZEndOfCentralDirectoryRecordSetFileCommnet(record, (const char *)(buffer + offset), fileCommentLength);
+        offset += fileCommentLength;
+    }
     
     return record;
 }
