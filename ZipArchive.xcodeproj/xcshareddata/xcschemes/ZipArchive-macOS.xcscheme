@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0E65B8EC1F0A7EF400EA1AB7"
+               BlueprintIdentifier = "0EAFDB401F0BA9A800A4CA33"
                BuildableName = "ZipArchive.framework"
-               BlueprintName = "ZipArchive"
+               BlueprintName = "ZipArchive-macOS"
                ReferencedContainer = "container:ZipArchive.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,13 +28,23 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0EAFDB481F0BA9A800A4CA33"
+               BuildableName = "ZipArchiveTests.xctest"
+               BlueprintName = "ZipArchiveTests-macOS"
+               ReferencedContainer = "container:ZipArchive.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E65B8EC1F0A7EF400EA1AB7"
+            BlueprintIdentifier = "0EAFDB401F0BA9A800A4CA33"
             BuildableName = "ZipArchive.framework"
-            BlueprintName = "ZipArchive"
+            BlueprintName = "ZipArchive-macOS"
             ReferencedContainer = "container:ZipArchive.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -54,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E65B8EC1F0A7EF400EA1AB7"
+            BlueprintIdentifier = "0EAFDB401F0BA9A800A4CA33"
             BuildableName = "ZipArchive.framework"
-            BlueprintName = "ZipArchive"
+            BlueprintName = "ZipArchive-macOS"
             ReferencedContainer = "container:ZipArchive.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -72,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0E65B8EC1F0A7EF400EA1AB7"
+            BlueprintIdentifier = "0EAFDB401F0BA9A800A4CA33"
             BuildableName = "ZipArchive.framework"
-            BlueprintName = "ZipArchive"
+            BlueprintName = "ZipArchive-macOS"
             ReferencedContainer = "container:ZipArchive.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
