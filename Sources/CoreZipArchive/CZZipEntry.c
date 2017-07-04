@@ -90,16 +90,16 @@ static void _CZZipEntryWriteHeader(CZStreamRef stream, CZEntryHeaderRef header) 
     }    
 }
 
-static void _CZZipEntryWriteFooter(CZStreamRef stream, CZDataDescriptor footer) {
-    uint8_t buffer[sizeof(uint32_t) * 3];
-    size_t offset = 0;
-    
-    offset += CZBinaryWriteUInt32LE(buffer + offset, footer.crc32);
-    offset += CZBinaryWriteUInt32LE(buffer + offset, footer.compressedSize);
-    offset += CZBinaryWriteUInt32LE(buffer + offset, footer.uncompressedSize);
-    
-    CZStreamWrite(stream, buffer, offset);
-}
+//static void _CZZipEntryWriteFooter(CZStreamRef stream, CZDataDescriptor footer) {
+//    uint8_t buffer[sizeof(uint32_t) * 3];
+//    size_t offset = 0;
+//    
+//    offset += CZBinaryWriteUInt32LE(buffer + offset, footer.crc32);
+//    offset += CZBinaryWriteUInt32LE(buffer + offset, footer.compressedSize);
+//    offset += CZBinaryWriteUInt32LE(buffer + offset, footer.uncompressedSize);
+//    
+//    CZStreamWrite(stream, buffer, offset);
+//}
 
 static void _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t headerOffset, CZEntryHeaderRef localHeader, CZDataDescriptor footer) {
     
@@ -137,7 +137,7 @@ static void _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t headerOf
         offset += CZBinaryWriteUInt16LE(buffer + offset, fileNameLength);
 
         // extraFieldLength
-        size_t extraFieldLengthOffset = offset;
+        //size_t extraFieldLengthOffset = offset;
         offset += CZBinaryWriteUInt16LE(buffer + offset, 0);
 
         // fileCommentLength

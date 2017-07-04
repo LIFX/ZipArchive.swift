@@ -102,7 +102,7 @@ void CZZipClose(CZZipRef obj) {
             break;
         }
         centralDirectorySize += rlen;
-        uint64_t wlen = CZStreamWrite(obj->stream, buffer, rlen);
+        /*uint64_t wlen = */CZStreamWrite(obj->stream, buffer, rlen);
     }
     
     // Write End Of Global Header
@@ -117,7 +117,7 @@ void CZZipClose(CZZipRef obj) {
     offset += CZBinaryWriteUInt32LE(buffer + offset, (uint32_t)centralDirectoryOffset);
     offset += CZBinaryWriteUInt16LE(buffer + offset, 0);
     
-    uint64_t wlen = CZStreamWrite(obj->stream, buffer, offset);
+    /*uint64_t wlen = */CZStreamWrite(obj->stream, buffer, offset);
     
     // FIXME: 本当はここで閉じたいが、テストで落ちる
     // NULL PTR を realloc しようとしたと言われる

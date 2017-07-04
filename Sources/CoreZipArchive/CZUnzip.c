@@ -89,7 +89,7 @@ static CZEndOfCentralDirectoryRecordRef _CZUnzipSearchEndOfCentralDirectoryRecor
     for (int64_t i = (maxLength - 1); i >= 3; i -= 1) {
         if (buffer[i] == 0x06 && buffer[i - 1] == 0x05 && buffer[i - 2] == 0x4b && buffer[i - 3] == 0x50) {
             size_t offset = i - 3;
-            size_t length = maxLength - offset;
+            //size_t length = maxLength - offset;
             record = _CZUnzipReadEndOfCentralDirectoryRecord(buffer + offset);
             break;
         }
@@ -109,7 +109,7 @@ static CZEntryHeaderRef _CZUnzipCreateCentralDirectoryHeader(CZStreamRef stream,
     
     size_t bufferSize = sizeof(CZEntryHeaderInfo) * 2;
     uint8_t * bytes = malloc(bufferSize);
-    size_t readLen = CZStreamRead(stream, bytes, bufferSize);
+    /*size_t readLen = */CZStreamRead(stream, bytes, bufferSize);
     
     size_t offset = 0;
     
