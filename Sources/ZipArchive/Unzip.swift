@@ -91,21 +91,21 @@ public class Unzip {
     }
 
     fileprivate let ptr: CZUnzipRef
-    fileprivate let stream: ZipArchiveStream
+    fileprivate let stream: ArchiveStream
     fileprivate let encoding: String.Encoding
     
     public convenience init?(data: Data, entryNameEncoding encoding: String.Encoding = .utf8) {
-        self.init(stream: ZipArchiveStream(data: data), entryNameEncoding: encoding)
+        self.init(stream: ArchiveStream(data: data), entryNameEncoding: encoding)
     }
     
     public convenience init?(fileAtPath path: String, entryNameEncoding encoding: String.Encoding = .utf8) {
-        guard let stream = ZipArchiveStream(fileAtPath: path, mode: .read) else {
+        guard let stream = ArchiveStream(fileAtPath: path, mode: .read) else {
             return nil
         }
         self.init(stream: stream, entryNameEncoding: encoding)
     }
     
-    public init?(stream: ZipArchiveStream, entryNameEncoding encoding: String.Encoding = .utf8) {
+    public init?(stream: ArchiveStream, entryNameEncoding encoding: String.Encoding = .utf8) {
         guard let ptr = CZUnzipCreate(stream.ptr) else {
             return nil
         }

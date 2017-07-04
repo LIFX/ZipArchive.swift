@@ -1,5 +1,5 @@
 //
-//  ZipConstants.swift
+//  ZipError.swift
 //  ZipArchive
 //
 //  Created by Yasuhiro Hatta on 2015/11/08.
@@ -7,9 +7,6 @@
 //
 
 import Foundation
-import CoreZipArchive
-
-public let DefaultBufferSize = CZDefaultBufferSize
 
 public enum ZipError: Error {
     

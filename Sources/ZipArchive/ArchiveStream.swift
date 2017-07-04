@@ -1,5 +1,5 @@
 //
-//  ZipArchiveStream.swift
+//  ArchiveStream.swift
 //  ZipArchive
 //
 //  Created by Yasuhiro Hatta on 2017/05/22.
@@ -24,7 +24,7 @@ extension CZStreamSeekOrigin {
     
 }
 
-public class ZipArchiveStream {
+public class ArchiveStream {
     
     public typealias Functions = CZStreamFunctions
     public typealias FileMode = CZStreamFileMode
@@ -80,7 +80,7 @@ public class ZipArchiveStream {
     
 }
 
-extension ZipArchiveStream {
+extension ArchiveStream {
     
     public var memoryData: Data? {
         guard let buf = CZStreamGetMemoryBuffer(ptr) else {

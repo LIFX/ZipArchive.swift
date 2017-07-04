@@ -7,39 +7,6 @@
 //
 
 import Foundation
-import CoreZipArchive
-
-extension ObjCBool {
-    
-    #if os(Linux)
-    var boolValue: Bool {
-        return self
-    }
-    #endif
-    
-}
-
-public func getcrc32(path: String) -> UInt32 {
-    guard let stream = InputStream(fileAtPath: path) else {
-        return 0
-    }
-    if stream.streamStatus == .notOpen {
-        stream.open()
-    }
-    var result: UInt = 0
-    var buffer = [UInt8](repeating: 0, count: DefaultBufferSize)
-    buffer.withUnsafeMutableBufferPointer { (pointer) -> Void in
-        while true {
-            let len = stream.read(pointer.baseAddress!, maxLength: pointer.count)
-            if len <= 0 {
-                break
-            }
-            result = crc32(result, pointer.baseAddress!, UInt32(len))
-        }
-    }
-    stream.close()
-    return UInt32(result)
-}
 
 extension Zip {
     
@@ -62,10 +29,7 @@ extension Zip {
                     throw ZipError.stringEncodingMismatch
                 }
             }
-            let count = UInt32(data.count)
-            crc32 = data.withUnsafeBytes { (bytes: UnsafePointer<UInt8>) in
-                return UInt32(CoreZipArchive.crc32(0, bytes, count))
-            }
+            crc32 = getcrc32(data: data)
         }
         
         let entry = self.appendEntry(name, method: method, level: level, password: password, crc32: crc32)

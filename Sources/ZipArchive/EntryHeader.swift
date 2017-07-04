@@ -8,7 +8,29 @@
 
 import CoreZipArchive
 
-public struct EntryHeader {
+public protocol LocalEntryHeader {
+    
+    /// version needed to extract
+    var versionNeededToExtract: Int { get set }
+    /// general purpose bit flag
+    var flags: UInt { get set }
+    /// compression method
+    var method: CompressionMethod { get set }
+    /// last mod file date & time
+    var dateTime: ZipArchiveDateTime { get set }
+    /// crc-32
+    var crc: UInt { get set }
+    /// compressed size
+    var compressedSize: Int { get set }
+    /// uncompressed size
+    var size: Int { get set }
+    
+    /// entry name
+    var entryName: String { get set }
+    
+}
+
+public struct EntryHeader: LocalEntryHeader {
 
     /// version made by (lower byte)
     public var versionMadeBy: Int
