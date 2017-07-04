@@ -97,6 +97,9 @@ void * CZStreamGetExtraData(const CZStreamRef obj) {
 }
 
 void CZStreamAttachCrypto(CZStreamRef obj, CZCryptoRef crypto) {
+    if (obj->crypto) {
+        // [warning]
+    }
     obj->crypto = crypto;
 }
 

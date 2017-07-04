@@ -67,7 +67,7 @@ swift_int_t CZStreamGetErrorCode(CZStreamRef _Nonnull obj);
 
 void * _Nullable CZStreamGetExtraData(const CZStreamRef _Nonnull obj);
 
-void CZStreamAttachCrypto(CZStreamRef _Nonnull obj, CZCryptoRef _Nonnull crypto);
+void CZStreamAttachCrypto(CZStreamRef _Nonnull obj, CZCryptoRef _Nullable crypto);
 
 CZCryptoRef _Nullable CZStreamDetachCrypto(CZStreamRef _Nonnull obj);
 

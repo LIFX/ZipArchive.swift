@@ -245,6 +245,7 @@ CZZipEntryRef CZZipEntryCreate(CZZipRef zip, const char * entryName, CZDateTime 
         CZCryptoMakeHeader(crypto, crc32, cryptoHeader);
         CZStreamWrite(stream, cryptoHeader, CZCryptoHeaderSize);
     }
+    // Begin crypto stream
     CZStreamAttachCrypto(stream, crypto);
     
     return obj;
@@ -274,6 +275,7 @@ void CZZipEntryClose(CZZipEntryRef obj) {
     footer.compressedSize = (uint32_t)CZCompressGetCompressedSize(obj->compress);
     footer.uncompressedSize = (uint32_t)CZCompressGetOriginalSize(obj->compress);
 
+    // End crypto stream
     CZStreamRef stream = CZZipGetStream(obj->zip);
     CZCryptoRef crypto = CZStreamDetachCrypto(stream);
     if (crypto) {
