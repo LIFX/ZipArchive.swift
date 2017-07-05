@@ -25,10 +25,10 @@ struct CZZipEntry {
 
 // MARK: - private
 
-static void _CZZipEntryWriteHeader(CZStreamRef stream, CZEntryHeaderRef header) {
+static inline void _CZZipEntryWriteHeader(CZStreamRef stream, CZEntryHeaderRef header) {
     const uint16_t fileNameLength = CZEntryHeaderGetFileNameLength(header);
     char fileName[fileNameLength + 1];
-    CZEntryHeaderGetFileName(header, fileName);
+    CZEntryHeaderGetFileName(header, fileName, fileNameLength + 1);
     
     uint16_t extraFieldLength = 0;
     CZDataRef extraFieldData = CZDataCreate();
@@ -101,11 +101,11 @@ static void _CZZipEntryWriteHeader(CZStreamRef stream, CZEntryHeaderRef header) 
 //    CZStreamWrite(stream, buffer, offset);
 //}
 
-static void _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t headerOffset, CZEntryHeaderRef localHeader, CZDataDescriptor footer) {
+static inline void _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t headerOffset, CZEntryHeaderRef localHeader, CZDataDescriptor footer) {
     
     const uint16_t fileNameLength = CZEntryHeaderGetFileNameLength(localHeader);
     char fileName[fileNameLength + 1];
-    CZEntryHeaderGetFileName(localHeader, fileName);
+    CZEntryHeaderGetFileName(localHeader, fileName, fileNameLength + 1);
     //CZDataRef fileName = CZLocalHeaderGetFileName(localHeader);
     //uint16_t fileNameLength = CZDataGetCount(fileName);
 

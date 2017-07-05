@@ -18,24 +18,28 @@ struct CZCrypto {
     
 };
 
+// MARK: - private
+
 bool _CZCryptoIsNeedToInitialize = true;
 
-static uint32_t _CZCryptoCRC32(const z_crc_t * table, uint32_t old, uint32_t c) {
+static inline uint32_t _CZCryptoCRC32(const z_crc_t * table, uint32_t old, uint32_t c) {
     uint8_t index = (old ^ c) & 0xff;
     return (uint32_t)table[index] ^ (old >> 8);
 }
 
-static void _CZCryptoUpdateKeys(CZCryptoRef obj, uint8_t c) {
+static inline void _CZCryptoUpdateKeys(CZCryptoRef obj, uint8_t c) {
     obj->keys[0] = _CZCryptoCRC32(obj->crc32Table, obj->keys[0], c);
     obj->keys[1] = obj->keys[1] + (obj->keys[0] & 0xff);
     obj->keys[1] = obj->keys[1] * 134775813 + 1;
     obj->keys[2] = _CZCryptoCRC32(obj->crc32Table, obj->keys[2], obj->keys[1] >> 24);
 }
 
-static uint8_t _CZCryptoDecryptByte(CZCryptoRef obj) {
+static inline uint8_t _CZCryptoDecryptByte(CZCryptoRef obj) {
     uint16_t temp = (obj->keys[2] & 0xffff) | 2;
     return ((temp * (temp ^ 1)) >> 8) & 0xff;
 }
+
+// MARK: - public
 
 CZCryptoRef CZCryptoCreate(const char * password) {
     CZCryptoRef obj = calloc(1, sizeof(struct CZCrypto));

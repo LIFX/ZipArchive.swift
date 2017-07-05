@@ -26,7 +26,7 @@ struct CZUnzip {
 
 // MARK: - private
 
-static CZEndOfCentralDirectoryRecordRef _CZUnzipReadEndOfCentralDirectoryRecord(uint8_t * buffer) {
+static inline CZEndOfCentralDirectoryRecordRef _CZUnzipReadEndOfCentralDirectoryRecord(uint8_t * buffer) {
     size_t offset = 0;
     
     uint32_t signature = CZBinaryReadUInt32LE(buffer + offset, &offset);
@@ -56,7 +56,7 @@ static CZEndOfCentralDirectoryRecordRef _CZUnzipReadEndOfCentralDirectoryRecord(
     return record;
 }
 
-static CZEndOfCentralDirectoryRecordRef _CZUnzipSearchEndOfCentralDirectoryRecord(CZStreamRef stream) {
+static inline CZEndOfCentralDirectoryRecordRef _CZUnzipSearchEndOfCentralDirectoryRecord(CZStreamRef stream) {
     swift_int_t status = CZStreamSeek(stream, 0, CZStreamSeekOriginEnd);
     if (status < 0) {
         return NULL;
@@ -98,7 +98,7 @@ static CZEndOfCentralDirectoryRecordRef _CZUnzipSearchEndOfCentralDirectoryRecor
     return record;
 }
 
-static CZEntryHeaderRef _CZUnzipCreateCentralDirectoryHeader(CZStreamRef stream, size_t * size) {
+static inline CZEntryHeaderRef _CZUnzipCreateCentralDirectoryHeader(CZStreamRef stream, size_t * size) {
     //        let data = NSData(bytesNoCopy: buffer, length: length, freeWhenDone: false)
     //
     //        byteSize = 0

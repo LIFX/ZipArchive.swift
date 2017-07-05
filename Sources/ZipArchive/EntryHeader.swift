@@ -66,9 +66,10 @@ public struct EntryHeader: LocalEntryHeader {
     
     init(_ ptr: CZEntryHeaderRef, encoding: String.Encoding) {
         let fileNameLength = CZEntryHeaderGetFileNameLength(ptr)
-        var fileNameBuffer = [CChar](repeating: 0, count: fileNameLength + 1)
-        CZEntryHeaderGetFileName(ptr, &fileNameBuffer)
-        guard let fileName = String(cString: fileNameBuffer, encoding: encoding) else {
+        let bufferSize = fileNameLength + 1
+        var buffer = [CChar](repeating: 0, count: bufferSize)
+        CZEntryHeaderGetFileName(ptr, &buffer, bufferSize)
+        guard let fileName = String(cString: buffer, encoding: encoding) else {
             // FIXME: 
             fatalError()
         }

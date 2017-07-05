@@ -18,7 +18,7 @@ struct CZArray {
 
 // MARK: - private
 
-static void _CZArrayAllocate(CZArrayRef obj) {
+static inline void _CZArrayAllocate(CZArrayRef obj) {
     if (obj->count != obj->capacity) {
         return;
     }

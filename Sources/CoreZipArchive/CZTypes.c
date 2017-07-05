@@ -11,14 +11,23 @@
 #include "CZArray_internal.h"
 #include "CZData_internal.h"
 
-static void CopyString(const CZDataRef data, char * str) {
+static inline void CopyString(const CZDataRef data, char * buffer, swift_int_t bufferSize) {
+    if (bufferSize == 0) {
+        return;
+    }
     if (data == NULL) {
-        str[0] = '\0';
+        buffer[0] = '\0';
         return;
     }
     swift_int_t count = CZDataGetLength(data);
-    memcpy(str, CZDataGetBytes(data), count);
-    str[count] = '\0';
+    if (count > bufferSize) {
+        buffer[0] = '\0';
+        return;
+    }
+    memcpy(buffer, CZDataGetBytes(data), count);
+    if (bufferSize > count) {
+        buffer[count] = '\0';
+    }
 }
 
 // -----------------------------------------------------------------------------
@@ -117,8 +126,8 @@ swift_int_t CZEntryHeaderGetFileNameLength(const CZEntryHeaderRef _Nonnull obj) 
     return CZDataGetLength(obj->fileName);
 }
 
-void CZEntryHeaderGetFileName(const CZEntryHeaderRef obj, char * str) {
-    CopyString(obj->fileName, str);
+void CZEntryHeaderGetFileName(const CZEntryHeaderRef obj, char * buffer, swift_int_t bufferSize) {
+    CopyString(obj->fileName, buffer, bufferSize);
 }
 
 void CZEntryHeaderSetFileName(CZEntryHeaderRef obj, const char * str, swift_int_t length) {
@@ -162,8 +171,8 @@ swift_int_t CZEntryHeaderGetFileCommentLength(const CZEntryHeaderRef _Nonnull ob
     return CZDataGetLength(obj->fileComment);
 }
 
-void CZEntryHeaderGetFileComment(const CZEntryHeaderRef obj, char * str) {
-    CopyString(obj->fileComment, str);
+void CZEntryHeaderGetFileComment(const CZEntryHeaderRef obj, char * buffer, swift_int_t bufferSize) {
+    CopyString(obj->fileComment, buffer, bufferSize);
 }
 
 void CZEntryHeaderSetFileComment(CZEntryHeaderRef obj, const char * str, swift_int_t length) {
@@ -214,8 +223,8 @@ swift_int_t CZEndOfCentralDirectoryRecordGetFileCommnetLength(const CZEndOfCentr
     return CZDataGetLength(obj->fileComment);
 }
 
-void CZEndOfCentralDirectoryRecordGetFileCommnet(const CZEndOfCentralDirectoryRecordRef obj, char * str) {
-    CopyString(obj->fileComment, str);
+void CZEndOfCentralDirectoryRecordGetFileCommnet(const CZEndOfCentralDirectoryRecordRef obj, char * buffer, swift_int_t bufferSize) {
+    CopyString(obj->fileComment, buffer, bufferSize);
 }
 
 void CZEndOfCentralDirectoryRecordSetFileCommnet(CZEndOfCentralDirectoryRecordRef obj, const char * str, swift_int_t length) {

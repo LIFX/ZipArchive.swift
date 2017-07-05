@@ -34,7 +34,7 @@ struct CZUnzipEntry {
 
 // MARK: - private
 
-static CZEntryHeaderRef _CZUnzipEntryReadLocalHeader(CZStreamRef stream, size_t headerOffset, size_t * headerSize) {
+static inline CZEntryHeaderRef _CZUnzipEntryReadLocalHeader(CZStreamRef stream, size_t headerOffset, size_t * headerSize) {
     CZEntryHeaderRef _header = CZEntryHeaderCreate();
     
     swift_int_t status;

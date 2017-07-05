@@ -84,7 +84,7 @@ CZEntryHeaderInfo CZEntryHeaderGetInfo(const CZEntryHeaderRef _Nonnull obj);
 void CZEntryHeaderSetInfo(CZEntryHeaderRef _Nonnull obj, CZEntryHeaderInfo info);
 
 swift_int_t CZEntryHeaderGetFileNameLength(const CZEntryHeaderRef _Nonnull obj);
-void CZEntryHeaderGetFileName(const CZEntryHeaderRef _Nonnull obj, char * _Nonnull str);
+void CZEntryHeaderGetFileName(const CZEntryHeaderRef _Nonnull obj, char * _Nonnull buffer, swift_int_t bufferSize);
 void CZEntryHeaderSetFileName(CZEntryHeaderRef _Nonnull obj, const char * _Nonnull str, swift_int_t length);
 
 swift_int_t CZEntryHeaderGetExtraFieldCount(const CZEntryHeaderRef _Nonnull obj);
@@ -93,7 +93,7 @@ const CZExtraFieldRef _Nullable CZEntryHeaderGetExtraFieldAtIndex(const CZEntryH
 swift_int_t CZEntryHeaderAppendExtraField(CZEntryHeaderRef _Nonnull obj, uint16_t id, const uint8_t * _Nonnull data, swift_int_t length);
 
 swift_int_t CZEntryHeaderGetFileCommentLength(const CZEntryHeaderRef _Nonnull obj);
-void CZEntryHeaderGetFileComment(const CZEntryHeaderRef _Nonnull obj, char * _Nonnull str);
+void CZEntryHeaderGetFileComment(const CZEntryHeaderRef _Nonnull obj, char * _Nonnull buffer, swift_int_t bufferSize);
 void CZEntryHeaderSetFileComment(CZEntryHeaderRef _Nonnull obj, const char * _Nonnull str, swift_int_t length);
 
 // -----------------------------------------------------------------------------
@@ -119,7 +119,7 @@ CZEndOfCentralDirectoryRecordInfo CZEndOfCentralDirectoryRecordGetInfo(const CZE
 void CZEndOfCentralDirectoryRecordSetInfo(CZEndOfCentralDirectoryRecordRef _Nonnull obj, CZEndOfCentralDirectoryRecordInfo info);
 
 swift_int_t CZEndOfCentralDirectoryRecordGetFileCommnetLength(const CZEndOfCentralDirectoryRecordRef _Nonnull obj);
-void CZEndOfCentralDirectoryRecordGetFileCommnet(const CZEndOfCentralDirectoryRecordRef _Nonnull obj, char * _Nonnull str);
+void CZEndOfCentralDirectoryRecordGetFileCommnet(const CZEndOfCentralDirectoryRecordRef _Nonnull obj, char * _Nonnull buffer, swift_int_t bufferSize);
 void CZEndOfCentralDirectoryRecordSetFileCommnet(CZEndOfCentralDirectoryRecordRef _Nonnull obj, const char * _Nonnull str, swift_int_t length);
 
 #endif /* CZTypes_h */

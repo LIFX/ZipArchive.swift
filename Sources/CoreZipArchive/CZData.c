@@ -18,7 +18,7 @@ struct CZData {
 
 // MARK: - private
 
-void _CZDataAllocate(CZDataRef obj, swift_int_t minCapacity) {
+static inline void _CZDataAllocate(CZDataRef obj, swift_int_t minCapacity) {
     if (minCapacity <= obj->capacity) {
         return;
     }
