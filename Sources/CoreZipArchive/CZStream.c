@@ -45,13 +45,16 @@ CZStreamRef CZStreamCreate(CZStreamFunctions functions, void * extraData) {
     return obj;
 }
 
-swift_int_t CZStreamRelease(CZStreamRef obj) {
-    swift_int_t status = 0;
-    if (obj->functions.close) {
-        status = obj->functions.close(obj->extraData);
-    }
+void CZStreamRelease(CZStreamRef obj) {
     free(obj);
-    return status;
+}
+
+swift_int_t CZStreamClose(CZStreamRef obj) {
+    if (obj->functions.close) {
+        return obj->functions.close(obj->extraData);
+    } else {
+        return 0;
+    }
 }
 
 size_t CZStreamRead(CZStreamRef obj, uint8_t * buffer, size_t count) {

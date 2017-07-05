@@ -53,7 +53,9 @@ typedef struct {
 
 CZStreamRef _Nonnull CZStreamCreate(CZStreamFunctions functions, void * _Nullable extraData);
 
-swift_int_t CZStreamRelease(CZStreamRef _Nonnull obj);
+void CZStreamRelease(CZStreamRef _Nonnull obj);
+
+swift_int_t CZStreamClose(CZStreamRef _Nonnull obj);
 
 size_t CZStreamRead(CZStreamRef _Nonnull obj, uint8_t * _Nonnull buffer, size_t count);
 

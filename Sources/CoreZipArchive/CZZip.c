@@ -55,6 +55,7 @@ void CZZipRelease(CZZipRef obj) {
 //    }
     if (obj->closeTempStreamWhenRelease) {
         if (obj->tempStream) {
+            CZStreamClose(obj->tempStream);
             CZStreamRelease(obj->tempStream);
         }
     }

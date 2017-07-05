@@ -58,6 +58,10 @@ public class ArchiveStream {
         CZStreamRelease(ptr)
     }
     
+    public func close() -> Int {
+        return CZStreamClose(ptr)
+    }
+    
     public func read(_ buffer: UnsafeMutablePointer<UInt8>, count: Int) -> Int {
         return CZStreamRead(ptr, buffer, count)
     }

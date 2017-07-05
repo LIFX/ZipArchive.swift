@@ -15,19 +15,19 @@ public class Zip {
         
         fileprivate let ptr: CZZipEntryRef
         
-        init(_ ptr: CZZipEntryRef) {
+        fileprivate init(_ ptr: CZZipEntryRef) {
             self.ptr = ptr
         }
         
         deinit {
             CZZipEntryRelease(ptr)
         }
-        
+
         public func write(_ buffer: UnsafePointer<UInt8>, count: Int) -> Int {
             return CZZipEntryWrite(ptr, buffer, count)
         }
         
-        public func close() {
+        fileprivate func close() {
             var dummy: UInt8 = 0
             let ret = write(&dummy, count: 0) // flush
             if ret != 0 {
@@ -63,7 +63,7 @@ public class Zip {
         CZZipRelease(ptr)
     }
     
-    public func appendEntry(_ entryName: String, method: CompressionMethod = .deflate, level: CompressionLevel = .optimal, password: String? = nil, crc32: UInt32 = 0) -> Entry {
+    public func appendEntry(_ entryName: String, method: CompressionMethod = .deflate, level: CompressionLevel = .optimal, password: String? = nil, crc32: UInt32 = 0, writeBlock: ((Entry) throws -> Void)) rethrows {
         // 引数: 日付、パーミッション、ディレクトリかどうか
         // TODO: ディレクトリの場合の考慮
         
@@ -89,11 +89,14 @@ public class Zip {
             cstrPass = cstr
         }
 
-        return Entry(CZZipAppendEntry(ptr, cstrName, method.rawValue, time, level.rawValue, nil, cstrPass, crc32))
+        let entry = Entry(CZZipAppendEntry(ptr, cstrName, method.rawValue, time, level.rawValue, nil, cstrPass, crc32))
+        defer { entry.close() }
+        try writeBlock(entry)
     }
     
     public func close() {
         CZZipClose(ptr)
+        _ = stream.close()
     }
     
 }

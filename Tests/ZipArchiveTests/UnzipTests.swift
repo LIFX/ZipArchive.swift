@@ -51,26 +51,24 @@ class UnzipTests: BaseTestCase {
         XCTAssertEqual(0, ret)
         
         let archive = Unzip(fileAtPath: archiveFile)!
-        //let archive = try! ZipArchive(path: archiveFile, mode: .read)
         
         var count = 0
         for entry in archive {
-            entry.open()
-//            let stream = try! entry.open()
             var data = Data(count: Int(entry.size))
             let length = data.count
             data.withUnsafeMutableBytes { (buffer) -> Void in
-//                _ = stream.read(buffer: buffer, maxLength: length)
-                _ = entry.read(buffer, count: length)
+                entry.extract { (reader) in
+                    _ = reader.read(buffer, count: length)
+                }
             }
-            entry.close()
+            
             let testData = files[entry.name]!
             XCTAssertEqual(data, testData)
             count += 1
         }
-
-        //archive.dispose()
         
+        archive.close()
+
         XCTAssertEqual(files.count, count)
     }
     
@@ -93,26 +91,24 @@ class UnzipTests: BaseTestCase {
         XCTAssertEqual(0, ret)
         
         let archive = Unzip(fileAtPath: archiveFile)!
-        //let archive = try! ZipArchive(path: archiveFile, mode: .read)
         
         var count = 0
         for entry in archive {
-            entry.open()
-            //let stream = try! entry.open()
             var data = Data(count: Int(entry.size))
             let length = data.count
             data.withUnsafeMutableBytes { (buffer) -> Void in
-                //_ = stream.read(buffer: buffer, maxLength: length)
-                _ = entry.read(buffer, count: length)
+                entry.extract { (reader) in
+                    _ = reader.read(buffer, count: length)
+                }
             }
-            entry.close()
+
             let testData = files[entry.name]!
             XCTAssertEqual(data, testData)
             count += 1
         }
-
-        //archive.dispose()
         
+        archive.close()
+
         XCTAssertEqual(files.count, count)
     }
 
@@ -142,24 +138,23 @@ class UnzipTests: BaseTestCase {
         XCTAssertEqual(0, ret)
         
         let archive = Unzip(fileAtPath: archiveFile)!
-        //let archive = try! ZipArchive(path: archiveFile, mode: .read)
         
         var count = 0
         for entry in archive {
-            entry.open()
-            //let stream = try! entry.open()
             var data = Data(count: Int(entry.size))
             let length = data.count
             data.withUnsafeMutableBytes { (buffer) -> Void in
-                _ = entry.read(buffer, count: length)
+                entry.extract { (reader) in
+                    _ = reader.read(buffer, count: length)
+                }
             }
-            entry.close()
+
             let testData = files[entry.name]!
             XCTAssertEqual(data, testData)
             count += 1
         }
 
-        //archive.dispose()
+        archive.close()
         
         XCTAssertEqual(files.count, count)
     }

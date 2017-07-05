@@ -54,7 +54,7 @@ public class Unzip {
             CZUnzipEntryRelease(ptr)
         }
         
-        public func open(password: String? = nil, decompressFactory: DecompressFactory? = nil) {
+        private func open(password: String? = nil, decompressFactory: DecompressFactory? = nil) {
             if let password = password {
                 guard let cstrPass = password.cString(using: .ascii) else {
                     // TODO:
@@ -72,20 +72,38 @@ public class Unzip {
             
             localHeader = EntryHeader(CZUnzipEntryGetLocalHeader(ptr), encoding: encoding)
         }
+
+        private func close() {
+            CZUnzipEntryClose(ptr)
+        }
+        
+        public func extract(password: String? = nil, decompressFactory: DecompressFactory? = nil, readBlock: ((EntryReader) throws -> Void)) rethrows {
+            self.open(password: password, decompressFactory: decompressFactory)
+            defer { self.close() }
+            try readBlock(EntryReader(ptr, crc32: globalHeader.crc))
+        }
+        
+    }
+    
+    public class EntryReader {
+
+        fileprivate let ptr: CZUnzipEntryRef // weak ref
+        fileprivate let crc32: UInt
+        
+        fileprivate init(_ ptr: CZUnzipEntryRef, crc32: UInt) {
+            self.ptr = ptr
+            self.crc32 = crc32
+        }
         
         public func read(_ buffer: UnsafeMutablePointer<UInt8>, count: Int) -> Int {
             return CZUnzipEntryRead(ptr, buffer, count)
         }
         
         public func validateChecksum() -> Bool {
-            let expectedValue = globalHeader.crc
+            let expectedValue = crc32
             let actualValue = CZUnzipGetCRC32(ptr)
             // FIXME: Swift 4 ではキャスト不要
             return expectedValue == UInt(actualValue)
-        }
-        
-        public func close() {
-            CZUnzipEntryClose(ptr)
         }
         
     }
@@ -118,6 +136,10 @@ public class Unzip {
         CZUnzipRelease(ptr)
     }
 
+    public func close() {
+        _ = stream.close()
+    }
+    
 }
 
 extension Unzip: IteratorProtocol, Sequence {
@@ -135,11 +157,11 @@ extension Unzip: IteratorProtocol, Sequence {
         CZUnzipResetIterator(ptr)
     }
     
-    public func enumerateEntries(invoking: (Entry, inout Bool) throws -> Void) rethrows {
+    public func enumerateEntries(invoking block: (Entry, inout Bool) throws -> Void) rethrows {
         CZUnzipResetIterator(ptr)
         var stop = false
         while let entry = next() {
-            try invoking(entry, &stop)
+            try block(entry, &stop)
             if stop {
                 break
             }

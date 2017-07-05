@@ -38,29 +38,19 @@ class ZipTests: BaseTestCase {
         ]
         
         let archiveFile = zipDestinationDirectory + "test.zip"
-        //let archive = try! ZipArchive(path: archiveFile, mode: .create)
-        do {
         let archive = Zip(toFileAtPath: archiveFile)!
         
         for fileName in files.keys {
-            let entry = archive.appendEntry(fileName, level: .default)
-            //let stream = try! entry.open()
             let data = files[fileName]!
             let length = data.count
-            data.withUnsafeBytes { (buffer) -> Void in
-                _ = entry.write(buffer, count: length)
+            archive.appendEntry(fileName, level: .default) { (entry) in
+                data.withUnsafeBytes { (buffer) -> Void in
+                    _ = entry.write(buffer, count: length)
+                }
             }
-//            data.withUnsafeBytes { (buffer) -> Void in
-//                _ = stream.write(buffer: buffer, maxLength: 0) // flush
-//            }
-//            stream.close()
+        }
             
-            entry.close()
-        }
-        
-//        archive.dispose()
         archive.close()
-        }
         
         let ret = executeCommand(
             command: "/usr/bin/unzip",
@@ -90,31 +80,20 @@ class ZipTests: BaseTestCase {
             "test_data9.dat" : createFixedData(size: DefaultBufferSize * 3 + 1),
         ]
         
-        //let created = createFiles(files: files, baseDirectory: testDataDirectory)
-        //XCTAssertTrue(created)
-        
         let archiveFile = zipDestinationDirectory + "test.zip"
-        //let archive = try! ZipArchive(path: archiveFile, mode: .create)
-        do {
         let archive = Zip(toFileAtPath: archiveFile)!
         
         for fileName in files.keys {
-            //let testDataFilePath = testDataDirectory + fileName
-            //_ = try! archive.createEntryFrom(filePath: testDataFilePath, entryName: fileName)
-            
-            
-            let entry = archive.appendEntry(fileName, level: .optimal)
             let data = files[fileName]!
             let length = data.count
-            data.withUnsafeBytes { (buffer) -> Void in
-                _ = entry.write(buffer, count: length)
+            archive.appendEntry(fileName, level: .optimal) { (entry) in
+                data.withUnsafeBytes { (buffer) -> Void in
+                    _ = entry.write(buffer, count: length)
+                }
             }
-            entry.close()
         }
         
-        //archive.dispose()
         archive.close()
-        }
         
         let ret = executeCommand(
             command: "/usr/bin/unzip",
@@ -132,4 +111,3 @@ class ZipTests: BaseTestCase {
     }
     
 }
-

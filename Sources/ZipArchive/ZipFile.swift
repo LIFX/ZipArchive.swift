@@ -59,6 +59,7 @@ public class ZipFile {
             throw ZipError.io
         }
         defer {
+            unzip.close()
             //unzip.dispose()
         }
         

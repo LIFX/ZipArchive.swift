@@ -34,10 +34,10 @@ extension Unzip {
         }
     }
     
-    private func extractFile(_ entry: Unzip.Entry, root: String) throws {
+    private func extractFile(_ entry: Unzip.Entry, root: String, password: String?) throws {
         let fullURL = URL(fileURLWithPath: root).appendingPathComponent(entry.name)
         try createBaseDirectory(root: root, subpath: entry.name)
-        try entry.extract(toFileAtPath: fullURL.path, overwrite: false)
+        try entry.extract(toFileAtPath: fullURL.path, overwrite: false, password: password)
     }
     
     //private func extractSymlink(_ entry: Unzip.Entry, root: String) throws {
@@ -56,13 +56,11 @@ extension Unzip {
     
     public func extract(toDirectoryAtPath path: String, password: String? = nil) throws {
         try self.enumerateEntries { (entry, _) in
-            entry.open(password: password, decompressFactory: nil)
             if entry.isDirectory {
                 try extractDirectory(entry, root: path)
             } else {
-                try extractFile(entry, root: path)
+                try extractFile(entry, root: path, password: password)
             }
-            entry.close()
         }
     }
     
@@ -70,25 +68,27 @@ extension Unzip {
 
 extension Unzip.Entry {
     
-    public func extractToData() throws -> Data {
+    public func extractToData(password: String? = nil) throws -> Data {
         var data = Data()
         var _buffer = [UInt8](repeating: 0, count: DefaultBufferSize)
         try _buffer.withUnsafeMutableBufferPointer { (buffer) -> Void in
-            while true {
-                let readLen = self.read(buffer.baseAddress!, count: buffer.count)
-                if readLen < 0 {
-                    throw ZipError.io
+            try self.extract(password: password) { (reader) in
+                while true {
+                    let readLen = reader.read(buffer.baseAddress!, count: buffer.count)
+                    if readLen < 0 {
+                        throw ZipError.io
+                    }
+                    if readLen == 0 {
+                        break
+                    }
+                    data.append(buffer.baseAddress!, count: readLen)
                 }
-                if readLen == 0 {
-                    break
-                }
-                data.append(buffer.baseAddress!, count: readLen)
             }
         }
         return data
     }
 
-    public func extract(toFileAtPath path: String, overwrite: Bool = false) throws {
+    public func extract(toFileAtPath path: String, overwrite: Bool = false, password: String? = nil) throws {
         let fileManager = FileManager.default
         
         if fileManager.fileExists(atPath: path) {
@@ -109,20 +109,22 @@ extension Unzip.Entry {
         let len = try _buffer.withUnsafeMutableBufferPointer { (buffer) -> Int in
             var totalLen = 0
             
-            while true {
-                let readLen = self.read(buffer.baseAddress!, count: buffer.count)
-                if readLen < 0 {
-                    throw ZipError.io
+            try self.extract(password: password) { (reader) in
+                while true {
+                    let readLen = reader.read(buffer.baseAddress!, count: buffer.count)
+                    if readLen < 0 {
+                        throw ZipError.io
+                    }
+                    if readLen == 0 {
+                        // END
+                        break
+                    }
+                    let err = stream.write(buffer.baseAddress!, maxLength: readLen)
+                    if err < 0 {
+                        throw ZipError.io
+                    }
+                    totalLen += readLen
                 }
-                if readLen == 0 {
-                    // END
-                    break
-                }
-                let err = stream.write(buffer.baseAddress!, maxLength: readLen)
-                if err < 0 {
-                    throw ZipError.io
-                }
-                totalLen += readLen
             }
             
             return totalLen
