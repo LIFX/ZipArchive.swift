@@ -1,0 +1,5 @@
+module CoreZipArchive {
+    header "CoreZipArchive.h"
+    link "z"
+    export *
+}

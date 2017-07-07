@@ -1,28 +1,32 @@
 //
-//  ZipFileTests.swift
+//  ZipFilePasswordTests.swift
 //  ZipArchive
 //
-//  Created by Yasuhiro Hatta on 2017/06/14.
-//
+//  Created by Yasuhiro Hatta on 2016/01/31.
+//  Copyright © 2016 yaslab. All rights reserved.
 //
 
 import Foundation
 import XCTest
 import ZipArchive
 
-class ZipFileTests: BaseTestCase {
+class ZipFilePasswordTests: BaseTestCase {
     
     static let allTests = [
-        ("testSelfZipSelfUnzipWithFixedData", testSelfZipSelfUnzipWithFixedData),
-        ("testSystemZipSelfUnzipWithFixedData", testSystemZipSelfUnzipWithFixedData),
-        ("testSelfZipSystemUnzipWithFixedData", testSelfZipSystemUnzipWithFixedData),
-        ("testSelfZipSelfUnzipWithRandomData", testSelfZipSelfUnzipWithRandomData),
-        ("testSystemZipSelfUnzipWithRandomData", testSystemZipSelfUnzipWithRandomData),
-        ("testSelfZipSystemUnzipWithRandomData", testSelfZipSystemUnzipWithRandomData)
+        ("testSelfZipSelfUnzipWithFixedDataAndPassword", testSelfZipSelfUnzipWithFixedDataAndPassword),
+        ("testSystemZipSelfUnzipWithFixedDataAndPassword", testSystemZipSelfUnzipWithFixedDataAndPassword),
+        ("testSelfZipSystemUnzipWithFixedDataAndPassword", testSelfZipSystemUnzipWithFixedDataAndPassword),
+        ("testSelfZipSelfUnzipWithRandomDataAndPassword", testSelfZipSelfUnzipWithRandomDataAndPassword),
+        ("testSystemZipSelfUnzipWithRandomDataAndPassword", testSystemZipSelfUnzipWithRandomDataAndPassword),
+        ("testSelfZipSystemUnzipWithRandomDataAndPassword", testSelfZipSystemUnzipWithRandomDataAndPassword)
     ]
-    
+
     override func setUp() {
         super.setUp()
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        //srand(UInt32(time(nil)))
+        
         do {
             try cleanUp()
         }
@@ -30,42 +34,43 @@ class ZipFileTests: BaseTestCase {
     }
     
     override func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
     // MARK: Fixed Data
     
-    func testSelfZipSelfUnzipWithFixedData() {
+    func testSelfZipSelfUnzipWithFixedDataAndPassword() {
         let files: [String : Data] = [
             "test_data1.dat" : createFixedData()
         ]
-        _testSelfZipSelfUnzip(files: files)
+        _testSelfZipSelfUnzipWithPassword(files: files)
     }
     
-    func testSystemZipSelfUnzipWithFixedData() {
+    func testSystemZipSelfUnzipWithFixedDataAndPassword() {
         let files: [String : Data] = [
             "test_data1.dat" : createFixedData()
         ]
-        _testSystemZipSelfUnzip(files: files)
+        _testSystemZipSelfUnzipWithPassword(files: files)
     }
     
-    func testSelfZipSystemUnzipWithFixedData() {
+    func testSelfZipSystemUnzipWithFixedDataAndPassword() {
         let files: [String : Data] = [
             "test_data1.dat" : createFixedData()
         ]
-        _testSelfZipSystemUnzip(files: files)
+        _testSelfZipSystemUnzipWithPassword(files: files)
     }
     
     // MARK: Random Data
     
-    func testSelfZipSelfUnzipWithRandomData() {
+    func testSelfZipSelfUnzipWithRandomDataAndPassword() {
         let files: [String : Data] = [
             "test_data1.dat" : createRandomData()
         ]
-        _testSelfZipSelfUnzip(files: files)
+        _testSelfZipSelfUnzipWithPassword(files: files)
     }
     
-    func testSystemZipSelfUnzipWithRandomData() {
+    func testSystemZipSelfUnzipWithRandomDataAndPassword() {
         let files: [String : Data] = [
             "test_data1.dat" : createRandomData(),
             "test_data2.dat" : createRandomData(),
@@ -76,10 +81,10 @@ class ZipFileTests: BaseTestCase {
             "test_data7.dat" : createRandomData(),
             "test_data8.dat" : createFixedData()
         ]
-        _testSystemZipSelfUnzip(files: files)
+        _testSystemZipSelfUnzipWithPassword(files: files)
     }
     
-    func testSelfZipSystemUnzipWithRandomData() {
+    func testSelfZipSystemUnzipWithRandomDataAndPassword() {
         let files: [String : Data] = [
             "test_data1.dat" : createRandomData(),
             "test_data2.dat" : createRandomData(),
@@ -90,26 +95,27 @@ class ZipFileTests: BaseTestCase {
             "test_data7.dat" : createRandomData(),
             "test_data8.dat" : createFixedData()
         ]
-        _testSelfZipSystemUnzip(files: files)
+        _testSelfZipSystemUnzipWithPassword(files: files)
     }
     
     // MARK: Utility
     
-    private func _testSelfZipSelfUnzip(files: [String : Data]) {
+    private func _testSelfZipSelfUnzipWithPassword(files: [String : Data]) {
         let created = createFiles(files: files, baseDirectory: testDataDirectory)
         XCTAssertTrue(created)
         
         let zipFileName = "test.zip"
         let zipFilePath = zipDestinationDirectory + zipFileName
+        let password = "abcde"
         
         do {
-            try ZipFile.createFromDirectory(at: testDataDirectory, to: zipFilePath)
+            try ZipFile.createFromDirectory(at: testDataDirectory, to: zipFilePath, password: password)
         } catch {
             XCTFail("\(error)")
         }
-        
+
         do {
-            try ZipFile.extractToDirectory(at: unzipDestinationDirectory, from: zipFilePath)
+            try ZipFile.extractToDirectory(at: unzipDestinationDirectory, from: zipFilePath, password: password)
         } catch {
             XCTFail("\(error)")
         }
@@ -121,22 +127,27 @@ class ZipFileTests: BaseTestCase {
             XCTAssertEqual(data, unzippedData)
         }
     }
-    
-    private func _testSystemZipSelfUnzip(files: [String : Data]) {
+
+    private func _testSystemZipSelfUnzipWithPassword(files: [String : Data]) {
         let created = createFiles(files: files, baseDirectory: testDataDirectory)
         XCTAssertTrue(created)
         
         let zipFileName = "test.zip"
         let zipFilePath = zipDestinationDirectory + zipFileName
+        let password = "abcde"
         
         let ret = executeCommand(
             command: "/usr/bin/zip",
-            arguments: [zipFilePath, "-r", "."],
+            arguments: ["-P", password, zipFilePath, "-r", "."],
             workingDirectory: testDataDirectory
         )
         XCTAssertEqual(0, ret)
         
-        try! ZipFile.extractToDirectory(at: unzipDestinationDirectory, from: zipFilePath)
+        do {
+            try ZipFile.extractToDirectory(at: unzipDestinationDirectory, from: zipFilePath, password: password)
+        } catch {
+            XCTFail("\(error)")
+        }
         
         for fileName in files.keys {
             let data = files[fileName]!
@@ -146,18 +157,23 @@ class ZipFileTests: BaseTestCase {
         }
     }
     
-    private func _testSelfZipSystemUnzip(files: [String : Data]) {
+    private func _testSelfZipSystemUnzipWithPassword(files: [String : Data]) {
         let created = createFiles(files: files, baseDirectory: testDataDirectory)
         XCTAssertTrue(created)
         
         let zipFileName = "test.zip"
         let zipFilePath = zipDestinationDirectory + zipFileName
+        let password = "abcde"
         
-        try! ZipFile.createFromDirectory(at: testDataDirectory, to: zipFilePath)
+        do {
+            try ZipFile.createFromDirectory(at: testDataDirectory, to: zipFilePath, password: password)
+        } catch {
+            XCTFail("\(error)")
+        }
         
         let ret = executeCommand(
             command: "/usr/bin/unzip",
-            arguments: ["-d", unzipDestinationDirectory, zipFilePath],
+            arguments: ["-d", unzipDestinationDirectory, "-P", password, zipFilePath],
             workingDirectory: nil
         )
         XCTAssertEqual(0, ret)

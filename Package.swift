@@ -1,9 +1,13 @@
+// swift-tools-version:4.0
+
 import PackageDescription
 
 let package = Package(
     name: "ZipArchive",
     targets: [
-        Target(name: "ZipArchive", dependencies: [.Target(name: "CZlib")]),
-        Target(name: "CZlib")
-    ]
+        .target(name: "ZipArchive", dependencies: ["CoreZipArchive"]),
+        .target(name: "CoreZipArchive"),
+        .testTarget(name: "ZipArchiveTests", dependencies: ["ZipArchive"])
+    ],
+    swiftLanguageVersions: [4]
 )

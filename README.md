@@ -2,11 +2,9 @@
 
 [![Build Status](https://travis-ci.org/yaslab/ZipArchive.swift.svg?branch=master)](https://travis-ci.org/yaslab/ZipArchive.swift)
 
-Zip archiving library written in Swift.
+Zip archiving library written in Swift and C.
 
 This library inspired by System.IO.Compression namespace of the .NET Framework.
-
-Contains the [Minizip](http://www.winimage.com/zLibDll/minizip.html) in this library.
 
 ## Usage
 
@@ -52,14 +50,16 @@ TBD
 
 ### Carthage
 
-Cartfile
-
 ```
 github "yaslab/ZipArchive.swift" ~> 0.1
+```
+
+### Swift Package Manager
+
+```
+.package(url: "https://github.com/yaslab/ZipArchive.swift.git", from: "0.1.0")
 ```
 
 ## License
 
 ZipArchive.swift is licensed under the [MIT license](https://github.com/yaslab/ZipArchive.swift/blob/master/LICENSE).
-
-[Minizip](http://www.winimage.com/zLibDll/minizip.html) is licensed under the [zlib license](http://www.zlib.net/zlib_license.html).
