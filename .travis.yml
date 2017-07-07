@@ -1,6 +1,8 @@
-language: objective-c
+language: swift
 osx_image: xcode8.3
 script:
   - set -o pipefail && xcodebuild test -scheme ZipArchive-macOS
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 notifications:
   email: false
