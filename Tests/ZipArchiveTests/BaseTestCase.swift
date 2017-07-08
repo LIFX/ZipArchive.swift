@@ -63,12 +63,8 @@ class BaseTestCase: XCTestCase {
     }
     
     func createFixedData(size: Int = 1234) -> Data {
-        var data = Data()
-        var byte = getRandom()
-        for _ in 0 ..< size {
-            data.append(&byte, count: 1)
-        }
-        return data
+        let byte = getRandom()
+        return Data(repeating: byte, count: size)
     }
     
     func createRandomData(size: Int = 1234) -> Data {

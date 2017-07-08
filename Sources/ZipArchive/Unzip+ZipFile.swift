@@ -89,15 +89,26 @@ extension Unzip.Entry {
     }
 
     public func extract(toFileAtPath path: String, overwrite: Bool = false, password: String? = nil) throws {
-        let fileManager = FileManager.default
+        if self.isDirectory {
+            throw ZipError.io
+        }
         
-        if fileManager.fileExists(atPath: path) {
+        let fileManager = FileManager.default
+        let url = URL(fileURLWithPath: path, isDirectory: false)
+        
+        if fileManager.fileExists(atPath: url.path) {
             if !overwrite {
                 throw ZipError.io
             }
         }
 
-        guard let stream = OutputStream(toFileAtPath: path, append: false) else {
+        do {
+            try fileManager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            throw ZipError.io
+        }
+        
+        guard let stream = OutputStream(url: url, append: false) else {
             throw ZipError.io
         }
         stream.open()
