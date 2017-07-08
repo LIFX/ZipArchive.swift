@@ -21,7 +21,59 @@ class ZipStreamTests: XCTestCase {
         super.tearDown()
     }
     
-    func testMemorySeek() {
+    // MARK: - Read / Write
+    
+    func testMemoryReadWrite() {
+        let stream = ZipStream(toMemory: ())
+        
+        // do test
+        _testReadWrite(stream: stream)
+        
+        _ = stream.close()
+    }
+
+    func testDataReadWrite() {
+        let stream = ZipStream(data: Data(repeating: 0, count: 128))
+        
+        // do test
+        _testReadWrite(stream: stream)
+        
+        _ = stream.close()
+    }
+
+    func testFileReadWrite() {
+        let tempFile = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            .appendingPathComponent(UUID().uuidString)
+        guard let stream = ZipStream(fileAtPath: tempFile.path, mode: .write) else {
+            XCTFail()
+            return
+        }
+        defer { try? FileManager.default.removeItem(at: tempFile) }
+        
+        // do test
+        _testReadWrite(stream: stream)
+        
+        _ = stream.close()
+    }
+    
+    private func _testReadWrite(stream: ZipStream) {
+        let writeBuffer: [UInt8] = [1, 2, 3, 4, 10, 20, 30, 40]
+        var readBuffer = [UInt8](repeating: 0, count: writeBuffer.count)
+
+        let writeLen = stream.write(writeBuffer, count: writeBuffer.count)
+        XCTAssertEqual(writeLen, writeBuffer.count)
+        
+        _ = stream.seek(offset: 0, origin: .begin)
+        
+        let readLen = stream.read(&readBuffer, count: readBuffer.count)
+        XCTAssertEqual(readLen, readBuffer.count)
+        
+        XCTAssertEqual(writeBuffer, readBuffer)
+    }
+    
+    // MARK: - Seek / Tell
+    
+    func testMemorySeekTell() {
         var buffer: [UInt8] = [1, 2, 3, 4]
         
         let stream = ZipStream(toMemory: ())
@@ -32,24 +84,24 @@ class ZipStreamTests: XCTestCase {
         XCTAssertEqual(stream.tell(), Int64(buffer.count))
 
         // do test
-        _testSeek(stream: stream, size: buffer.count)
+        _testSeekTell(stream: stream, size: buffer.count)
         
         _ = stream.close()
     }
 
-    func testDataSeek() {
+    func testDataSeekTell() {
         let buffer: [UInt8] = [1, 2, 3, 4]
         
         let stream = ZipStream(data: Data(buffer))
         XCTAssertEqual(stream.tell(), 0)
 
         // do test
-        _testSeek(stream: stream, size: buffer.count)
+        _testSeekTell(stream: stream, size: buffer.count)
         
         _ = stream.close()
     }
 
-    func testFileSeek() {
+    func testFileSeekTell() {
         var buffer: [UInt8] = [1, 2, 3, 4]
 
         let tempFile = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
@@ -70,12 +122,12 @@ class ZipStreamTests: XCTestCase {
         XCTAssertEqual(stream.tell(), 0)
 
         // do test
-        _testSeek(stream: stream, size: buffer.count)
+        _testSeekTell(stream: stream, size: buffer.count)
         
         _ = stream.close()
     }
     
-    private func _testSeek(stream: ZipStream, size: Int) {
+    private func _testSeekTell(stream: ZipStream, size: Int) {
         _ = stream.seek(offset: 0, origin: .begin)
         XCTAssertEqual(stream.tell(), 0)
         _ = stream.seek(offset: 1, origin: .begin)
