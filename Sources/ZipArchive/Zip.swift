@@ -39,21 +39,21 @@ public class Zip {
     }
     
     fileprivate let ptr: CZZipRef
-    fileprivate let stream: ArchiveStream
+    fileprivate let stream: ZipStream
     fileprivate let encoding: String.Encoding
 
     public convenience init(toMemory: (), entryNameEncoding encoding: String.Encoding = .utf8) {
-        self.init(stream: ArchiveStream(toMemory: ()), entryNameEncoding: encoding)
+        self.init(stream: ZipStream(toMemory: ()), entryNameEncoding: encoding)
     }
     
     public convenience init?(toFileAtPath path: String, entryNameEncoding encoding: String.Encoding = .utf8) {
-        guard let stream = ArchiveStream(fileAtPath: path, mode: .write) else {
+        guard let stream = ZipStream(fileAtPath: path, mode: .write) else {
             return nil
         }
         self.init(stream: stream, entryNameEncoding: encoding)
     }
 
-    public init(stream: ArchiveStream, entryNameEncoding encoding: String.Encoding = .utf8) {
+    public init(stream: ZipStream, entryNameEncoding encoding: String.Encoding = .utf8) {
         self.ptr = CZZipCreate(stream.ptr)
         self.stream = stream
         self.encoding = encoding
