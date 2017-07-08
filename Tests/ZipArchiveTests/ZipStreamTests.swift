@@ -6,10 +6,20 @@
 //  Copyright © 2017 yaslab. All rights reserved.
 //
 
+import Foundation
 import XCTest
 import ZipArchive
 
 class ZipStreamTests: XCTestCase {
+    
+    static let allTests = [
+        ("testMemoryReadWrite", testMemoryReadWrite),
+        ("testDataReadWrite", testDataReadWrite),
+        ("testFileReadWrite", testFileReadWrite),
+        ("testMemorySeekTell", testMemorySeekTell),
+        ("testDataSeekTell", testDataSeekTell),
+        ("testFileSeekTell", testFileSeekTell)
+    ]
     
     override func setUp() {
         super.setUp()
