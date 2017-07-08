@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E1C7B411F1080880044381E /* ZipStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C7B401F1080880044381E /* ZipStreamTests.swift */; };
 		0E1C7B431F10FC4B0044381E /* UnzipZipFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C7B421F10FC4B0044381E /* UnzipZipFileTests.swift */; };
+		0E1C7B451F110CE90044381E /* ZipZipFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C7B441F110CE90044381E /* ZipZipFileTests.swift */; };
 		0E65B8F21F0A7EF400EA1AB7 /* ZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B8F01F0A7EF400EA1AB7 /* ZipArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E65B9C21F0A822E00EA1AB7 /* CZArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9831F0A822E00EA1AB7 /* CZArray.c */; };
 		0E65B9C31F0A822E00EA1AB7 /* CZBinaryUtility.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9841F0A822E00EA1AB7 /* CZBinaryUtility.c */; };
@@ -152,6 +153,7 @@
 /* Begin PBXFileReference section */
 		0E1C7B401F1080880044381E /* ZipStreamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipStreamTests.swift; sourceTree = "<group>"; };
 		0E1C7B421F10FC4B0044381E /* UnzipZipFileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnzipZipFileTests.swift; sourceTree = "<group>"; };
+		0E1C7B441F110CE90044381E /* ZipZipFileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipZipFileTests.swift; sourceTree = "<group>"; };
 		0E65B8ED1F0A7EF400EA1AB7 /* ZipArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZipArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E65B8F01F0A7EF400EA1AB7 /* ZipArchive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
 		0E65B8F11F0A7EF400EA1AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				0EAFDB9E1F0BAF5B00A4CA33 /* ZipFileTests.swift */,
 				0E1C7B401F1080880044381E /* ZipStreamTests.swift */,
 				0EAFDB9F1F0BAF5B00A4CA33 /* ZipTests.swift */,
+				0E1C7B441F110CE90044381E /* ZipZipFileTests.swift */,
 			);
 			name = ZipArchiveTests;
 			path = Tests/ZipArchiveTests;
@@ -674,6 +677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EAFDBA11F0BAF5B00A4CA33 /* UnzipTests.swift in Sources */,
+				0E1C7B451F110CE90044381E /* ZipZipFileTests.swift in Sources */,
 				0EAFDBA41F0BAF5B00A4CA33 /* ZipTests.swift in Sources */,
 				0EAFDBA21F0BAF5B00A4CA33 /* ZipFilePasswordTests.swift in Sources */,
 				0EAFDBA01F0BAF5B00A4CA33 /* BaseTestCase.swift in Sources */,
