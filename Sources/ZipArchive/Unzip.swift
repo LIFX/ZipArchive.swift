@@ -78,6 +78,10 @@ public class Unzip {
         }
         
         public func extract(password: String? = nil, decompressFactory: DecompressFactory? = nil, readBlock: ((EntryReader) throws -> Void)) rethrows {
+            var password = password
+            if self.isDirectory {
+                password = nil
+            }
             self.open(password: password, decompressFactory: decompressFactory)
             defer { self.close() }
             try readBlock(EntryReader(ptr, crc32: globalHeader.crc))
@@ -109,21 +113,21 @@ public class Unzip {
     }
 
     fileprivate let ptr: CZUnzipRef
-    fileprivate let stream: ArchiveStream
+    fileprivate let stream: ZipStream
     fileprivate let encoding: String.Encoding
     
     public convenience init?(data: Data, entryNameEncoding encoding: String.Encoding = .utf8) {
-        self.init(stream: ArchiveStream(data: data), entryNameEncoding: encoding)
+        self.init(stream: ZipStream(data: data), entryNameEncoding: encoding)
     }
     
     public convenience init?(fileAtPath path: String, entryNameEncoding encoding: String.Encoding = .utf8) {
-        guard let stream = ArchiveStream(fileAtPath: path, mode: .read) else {
+        guard let stream = ZipStream(fileAtPath: path, mode: .read) else {
             return nil
         }
         self.init(stream: stream, entryNameEncoding: encoding)
     }
     
-    public init?(stream: ArchiveStream, entryNameEncoding encoding: String.Encoding = .utf8) {
+    public init?(stream: ZipStream, entryNameEncoding encoding: String.Encoding = .utf8) {
         guard let ptr = CZUnzipCreate(stream.ptr) else {
             return nil
         }

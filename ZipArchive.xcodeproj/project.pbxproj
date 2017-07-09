@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E1C7B411F1080880044381E /* ZipStreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C7B401F1080880044381E /* ZipStreamTests.swift */; };
+		0E1C7B431F10FC4B0044381E /* UnzipZipFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C7B421F10FC4B0044381E /* UnzipZipFileTests.swift */; };
+		0E1C7B451F110CE90044381E /* ZipZipFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1C7B441F110CE90044381E /* ZipZipFileTests.swift */; };
 		0E65B8F21F0A7EF400EA1AB7 /* ZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E65B8F01F0A7EF400EA1AB7 /* ZipArchive.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0E65B9C21F0A822E00EA1AB7 /* CZArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9831F0A822E00EA1AB7 /* CZArray.c */; };
 		0E65B9C31F0A822E00EA1AB7 /* CZBinaryUtility.c in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9841F0A822E00EA1AB7 /* CZBinaryUtility.c */; };
@@ -64,7 +67,7 @@
 		0E65B9F81F0A822F00EA1AB7 /* Unzip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BC1F0A822E00EA1AB7 /* Unzip.swift */; };
 		0E65B9F91F0A822F00EA1AB7 /* Zip+ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BD1F0A822E00EA1AB7 /* Zip+ZipFile.swift */; };
 		0E65B9FA1F0A822F00EA1AB7 /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BE1F0A822E00EA1AB7 /* Zip.swift */; };
-		0E65B9FB1F0A822F00EA1AB7 /* ArchiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BF1F0A822E00EA1AB7 /* ArchiveStream.swift */; };
+		0E65B9FB1F0A822F00EA1AB7 /* ZipStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BF1F0A822E00EA1AB7 /* ZipStream.swift */; };
 		0E65B9FC1F0A822F00EA1AB7 /* ZipError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9C01F0A822E00EA1AB7 /* ZipError.swift */; };
 		0E65B9FD1F0A822F00EA1AB7 /* ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9C11F0A822E00EA1AB7 /* ZipFile.swift */; };
 		0E7D081C1F0BE19300C4B94B /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7D081B1F0BE19300C4B94B /* Utility.swift */; };
@@ -127,14 +130,14 @@
 		0EAFDB941F0BAD9F00A4CA33 /* Unzip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BC1F0A822E00EA1AB7 /* Unzip.swift */; };
 		0EAFDB951F0BAD9F00A4CA33 /* Zip+ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BD1F0A822E00EA1AB7 /* Zip+ZipFile.swift */; };
 		0EAFDB961F0BAD9F00A4CA33 /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BE1F0A822E00EA1AB7 /* Zip.swift */; };
-		0EAFDB971F0BAD9F00A4CA33 /* ArchiveStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BF1F0A822E00EA1AB7 /* ArchiveStream.swift */; };
+		0EAFDB971F0BAD9F00A4CA33 /* ZipStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9BF1F0A822E00EA1AB7 /* ZipStream.swift */; };
 		0EAFDB981F0BAD9F00A4CA33 /* ZipError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9C01F0A822E00EA1AB7 /* ZipError.swift */; };
 		0EAFDB991F0BAD9F00A4CA33 /* ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E65B9C11F0A822E00EA1AB7 /* ZipFile.swift */; };
 		0EAFDBA01F0BAF5B00A4CA33 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAFDB9B1F0BAF5B00A4CA33 /* BaseTestCase.swift */; };
 		0EAFDBA11F0BAF5B00A4CA33 /* UnzipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAFDB9C1F0BAF5B00A4CA33 /* UnzipTests.swift */; };
 		0EAFDBA21F0BAF5B00A4CA33 /* ZipFilePasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAFDB9D1F0BAF5B00A4CA33 /* ZipFilePasswordTests.swift */; };
 		0EAFDBA31F0BAF5B00A4CA33 /* ZipFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAFDB9E1F0BAF5B00A4CA33 /* ZipFileTests.swift */; };
-		0EAFDBA41F0BAF5B00A4CA33 /* ZipTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAFDB9F1F0BAF5B00A4CA33 /* ZipTestCase.swift */; };
+		0EAFDBA41F0BAF5B00A4CA33 /* ZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAFDB9F1F0BAF5B00A4CA33 /* ZipTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +151,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E1C7B401F1080880044381E /* ZipStreamTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipStreamTests.swift; sourceTree = "<group>"; };
+		0E1C7B421F10FC4B0044381E /* UnzipZipFileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnzipZipFileTests.swift; sourceTree = "<group>"; };
+		0E1C7B441F110CE90044381E /* ZipZipFileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipZipFileTests.swift; sourceTree = "<group>"; };
 		0E65B8ED1F0A7EF400EA1AB7 /* ZipArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZipArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E65B8F01F0A7EF400EA1AB7 /* ZipArchive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
 		0E65B8F11F0A7EF400EA1AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -208,7 +214,7 @@
 		0E65B9BC1F0A822E00EA1AB7 /* Unzip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unzip.swift; sourceTree = "<group>"; };
 		0E65B9BD1F0A822E00EA1AB7 /* Zip+ZipFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Zip+ZipFile.swift"; sourceTree = "<group>"; };
 		0E65B9BE1F0A822E00EA1AB7 /* Zip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zip.swift; sourceTree = "<group>"; };
-		0E65B9BF1F0A822E00EA1AB7 /* ArchiveStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveStream.swift; sourceTree = "<group>"; };
+		0E65B9BF1F0A822E00EA1AB7 /* ZipStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipStream.swift; sourceTree = "<group>"; };
 		0E65B9C01F0A822E00EA1AB7 /* ZipError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipError.swift; sourceTree = "<group>"; };
 		0E65B9C11F0A822E00EA1AB7 /* ZipFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipFile.swift; sourceTree = "<group>"; };
 		0E7D081B1F0BE19300C4B94B /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
@@ -219,7 +225,7 @@
 		0EAFDB9C1F0BAF5B00A4CA33 /* UnzipTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnzipTests.swift; sourceTree = "<group>"; };
 		0EAFDB9D1F0BAF5B00A4CA33 /* ZipFilePasswordTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipFilePasswordTests.swift; sourceTree = "<group>"; };
 		0EAFDB9E1F0BAF5B00A4CA33 /* ZipFileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipFileTests.swift; sourceTree = "<group>"; };
-		0EAFDB9F1F0BAF5B00A4CA33 /* ZipTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipTestCase.swift; sourceTree = "<group>"; };
+		0EAFDB9F1F0BAF5B00A4CA33 /* ZipTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,7 +353,6 @@
 		0E65B9B61F0A822E00EA1AB7 /* ZipArchive */ = {
 			isa = PBXGroup;
 			children = (
-				0E65B9BF1F0A822E00EA1AB7 /* ArchiveStream.swift */,
 				0E65B9B71F0A822E00EA1AB7 /* CompressionLevel.swift */,
 				0E65B9B81F0A822E00EA1AB7 /* CompressionMethod.swift */,
 				0E65B9B91F0A822E00EA1AB7 /* EntryHeader.swift */,
@@ -358,6 +363,7 @@
 				0E65B9BD1F0A822E00EA1AB7 /* Zip+ZipFile.swift */,
 				0E65B9C01F0A822E00EA1AB7 /* ZipError.swift */,
 				0E65B9C11F0A822E00EA1AB7 /* ZipFile.swift */,
+				0E65B9BF1F0A822E00EA1AB7 /* ZipStream.swift */,
 			);
 			name = ZipArchive;
 			path = Sources/ZipArchive;
@@ -377,9 +383,12 @@
 			children = (
 				0EAFDB9B1F0BAF5B00A4CA33 /* BaseTestCase.swift */,
 				0EAFDB9C1F0BAF5B00A4CA33 /* UnzipTests.swift */,
+				0E1C7B421F10FC4B0044381E /* UnzipZipFileTests.swift */,
 				0EAFDB9D1F0BAF5B00A4CA33 /* ZipFilePasswordTests.swift */,
 				0EAFDB9E1F0BAF5B00A4CA33 /* ZipFileTests.swift */,
-				0EAFDB9F1F0BAF5B00A4CA33 /* ZipTestCase.swift */,
+				0E1C7B401F1080880044381E /* ZipStreamTests.swift */,
+				0EAFDB9F1F0BAF5B00A4CA33 /* ZipTests.swift */,
+				0E1C7B441F110CE90044381E /* ZipZipFileTests.swift */,
 			);
 			name = ZipArchiveTests;
 			path = Tests/ZipArchiveTests;
@@ -601,7 +610,7 @@
 				0E65B9D51F0A822F00EA1AB7 /* CZZip.c in Sources */,
 				0E65B9F81F0A822F00EA1AB7 /* Unzip.swift in Sources */,
 				0E65B9F71F0A822F00EA1AB7 /* Unzip+ZipFile.swift in Sources */,
-				0E65B9FB1F0A822F00EA1AB7 /* ArchiveStream.swift in Sources */,
+				0E65B9FB1F0A822F00EA1AB7 /* ZipStream.swift in Sources */,
 				0E65B9C41F0A822E00EA1AB7 /* CZCompress.c in Sources */,
 				0E65B9CC1F0A822F00EA1AB7 /* CZDecompressStore.c in Sources */,
 				0E65B9D31F0A822F00EA1AB7 /* CZUnzipEntry.c in Sources */,
@@ -640,7 +649,7 @@
 				0EAFDB711F0BAD8200A4CA33 /* CZZip.c in Sources */,
 				0EAFDB941F0BAD9F00A4CA33 /* Unzip.swift in Sources */,
 				0EAFDB931F0BAD9F00A4CA33 /* Unzip+ZipFile.swift in Sources */,
-				0EAFDB971F0BAD9F00A4CA33 /* ArchiveStream.swift in Sources */,
+				0EAFDB971F0BAD9F00A4CA33 /* ZipStream.swift in Sources */,
 				0EAFDB601F0BAD8200A4CA33 /* CZCompress.c in Sources */,
 				0EAFDB681F0BAD8200A4CA33 /* CZDecompressStore.c in Sources */,
 				0EAFDB6F1F0BAD8200A4CA33 /* CZUnzipEntry.c in Sources */,
@@ -668,10 +677,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EAFDBA11F0BAF5B00A4CA33 /* UnzipTests.swift in Sources */,
-				0EAFDBA41F0BAF5B00A4CA33 /* ZipTestCase.swift in Sources */,
+				0E1C7B451F110CE90044381E /* ZipZipFileTests.swift in Sources */,
+				0EAFDBA41F0BAF5B00A4CA33 /* ZipTests.swift in Sources */,
 				0EAFDBA21F0BAF5B00A4CA33 /* ZipFilePasswordTests.swift in Sources */,
 				0EAFDBA01F0BAF5B00A4CA33 /* BaseTestCase.swift in Sources */,
 				0EAFDBA31F0BAF5B00A4CA33 /* ZipFileTests.swift in Sources */,
+				0E1C7B411F1080880044381E /* ZipStreamTests.swift in Sources */,
+				0E1C7B431F10FC4B0044381E /* UnzipZipFileTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

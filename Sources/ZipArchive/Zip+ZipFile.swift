@@ -11,38 +11,21 @@ import Foundation
 extension Zip {
     
     public func appendEntry(fromData data: Data, entryName: String, isDirectory: Bool = false, method: CompressionMethod = .deflate, level: CompressionLevel = .optimal, password: String? = nil) throws {
-        var name = entryName
-        var method = method
-        var level = level
-        var cstrPass: [CChar]? = nil
+
         var crc32: UInt32 = 0
-        if isDirectory {
-            if !name.hasSuffix("/") {
-                name += "/"
+        if !isDirectory {
+            if password != nil {
+                crc32 = getcrc32(data: data)
             }
-            method = .store
-            level = .noCompression
-        } else {
-            if let password = password {
-                cstrPass = password.cString(using: .ascii)
-                if cstrPass == nil {
-                    throw ZipError.stringEncodingMismatch
-                }
-            }
-            crc32 = getcrc32(data: data)
         }
         
-        try self.appendEntry(name, method: method, level: level, password: password, crc32: crc32) { entry in
-            if isDirectory {
-                // Do Nothing
-            } else {
-                let count = data.count
-                let len = data.withUnsafeBytes { (bytes: UnsafePointer<UInt8>) in
-                    return entry.write(bytes, count: count)
-                }
-                if len != count {
-                    throw ZipError.io
-                }
+        try self.appendEntry(entryName, isDirectory: isDirectory, method: method, level: level, password: password, crc32: crc32) { fileEntry in
+            let count = data.count
+            let len = data.withUnsafeBytes { (bytes: UnsafePointer<UInt8>) in
+                return fileEntry.write(bytes, count: count)
+            }
+            if len != count {
+                throw ZipError.io
             }
         }
     }
@@ -61,63 +44,48 @@ extension Zip {
         }
         
         // pre-process
-        var name = entryName
-        var method = method
-        var level = level
-        var cstrPass: [CChar]? = nil
         var crc32: UInt32 = 0
-        if isDirectory.boolValue {
-            if !name.hasSuffix("/") {
-                name += "/"
+        if !isDirectory.boolValue {
+            if password != nil {
+                crc32 = getcrc32(path: path)
             }
-            method = .store
-            level = .noCompression
-        } else {
-            if let password = password {
-                cstrPass = password.cString(using: .ascii)
-                if cstrPass == nil {
-                    throw ZipError.stringEncodingMismatch
-                }
-            }
-            crc32 = getcrc32(path: path)
         }
 
-        try self.appendEntry(name, method: method, level: level, password: password, crc32: crc32) { entry in
+        try self.appendEntry(entryName, isDirectory: isDirectory.boolValue, method: method, level: level, password: password, crc32: crc32) { fileEntry in
             if isDirectory.boolValue {
-                // Do Nothing
-            } else {
-                guard let fileInputStream = InputStream(fileAtPath: path) else {
-                    throw ZipError.io
+                return
+            }
+            guard let fileInputStream = InputStream(fileAtPath: path) else {
+                throw ZipError.io
+            }
+            fileInputStream.open()
+            defer {
+                fileInputStream.close()
+            }
+            let buffer = malloc(DefaultBufferSize).assumingMemoryBound(to: UInt8.self)
+            defer {
+                free(buffer)
+            }
+            while true {
+                let len = fileInputStream.read(buffer, maxLength: DefaultBufferSize)
+                if len < 0 {
+                    // ERROR
+                    break
                 }
-                fileInputStream.open()
-                defer {
-                    fileInputStream.close()
+                if len == 0 {
+                    // END
+                    break
                 }
-                let buffer = malloc(DefaultBufferSize).assumingMemoryBound(to: UInt8.self)
-                defer {
-                    free(buffer)
-                }
-                while true {
-                    let len = fileInputStream.read(buffer, maxLength: DefaultBufferSize)
-                    if len < 0 {
-                        // ERROR
-                        break
-                    }
-                    if len == 0 {
-                        // END
-                        break
-                    }
-                    let err = entry.write(buffer, count: len)
-                    if err < 0 {
-                        // ERROR
-                        break
-                    }
-                }
-                let err = entry.write(buffer, count: 0) // flush
+                let err = fileEntry.write(buffer, count: len)
                 if err < 0 {
                     // ERROR
-                    throw ZipError.io
+                    break
                 }
+            }
+            let err = fileEntry.write(buffer, count: 0) // flush
+            if err < 0 {
+                // ERROR
+                throw ZipError.io
             }
         }
     }

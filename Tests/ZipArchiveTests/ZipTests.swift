@@ -1,9 +1,9 @@
 //
-//  ZipTestCase.swift
+//  ZipTests.swift
 //  ZipArchive
 //
 //  Created by Yasuhiro Hatta on 2017/06/10.
-//
+//  Copyright © 2017 yaslab. All rights reserved.
 //
 
 import Foundation
@@ -13,8 +13,9 @@ import ZipArchive
 class ZipTests: BaseTestCase {
     
     static let allTests = [
-        ("test圧縮ファイル", test圧縮ファイル),
-        ("test圧縮ファイルのバッファサイズ", test圧縮ファイルのバッファサイズ)
+        ("testFileCompress", testFileCompressDeflate),
+        ("testFileCompressStore", testFileCompressStore),
+        ("testFileCompressAndBufferSize", testFileCompressAndBufferSize)
     ]
     
     override func setUp() {
@@ -32,7 +33,7 @@ class ZipTests: BaseTestCase {
         super.tearDown()
     }
     
-    func test圧縮ファイル() {
+    func testFileCompressDeflate() {
         let files: [String : Data] = [
             "test_data.dat" : createFixedData()
         ]
@@ -67,7 +68,42 @@ class ZipTests: BaseTestCase {
         }
     }
     
-    func test圧縮ファイルのバッファサイズ() {
+    func testFileCompressStore() {
+        let files: [String : Data] = [
+            "test_data.dat" : createFixedData()
+        ]
+        
+        let archiveFile = zipDestinationDirectory + "test.zip"
+        let archive = Zip(toFileAtPath: archiveFile)!
+        
+        for fileName in files.keys {
+            let data = files[fileName]!
+            let length = data.count
+            archive.appendEntry(fileName, method: .store) { (entry) in
+                data.withUnsafeBytes { (buffer) -> Void in
+                    _ = entry.write(buffer, count: length)
+                }
+            }
+        }
+        
+        archive.close()
+        
+        let ret = executeCommand(
+            command: "/usr/bin/unzip",
+            arguments: ["-d", unzipDestinationDirectory, archiveFile],
+            workingDirectory: nil
+        )
+        XCTAssertEqual(0, ret)
+        
+        for fileName in files.keys {
+            let unzipTestDataFile = unzipDestinationDirectory + fileName
+            let unzipTestData = try! Data(contentsOf: URL(fileURLWithPath: unzipTestDataFile))
+            let data = files[fileName]!
+            XCTAssertEqual(data, unzipTestData)
+        }
+    }
+    
+    func testFileCompressAndBufferSize() {
         let files: [String : Data] = [
             "test_data1.dat" : createFixedData(size: DefaultBufferSize - 1),
             "test_data2.dat" : createFixedData(size: DefaultBufferSize),

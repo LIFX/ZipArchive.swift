@@ -14,7 +14,7 @@ public class Zip {
     public class Entry {
         
         fileprivate let ptr: CZZipEntryRef
-        
+
         fileprivate init(_ ptr: CZZipEntryRef) {
             self.ptr = ptr
         }
@@ -39,21 +39,21 @@ public class Zip {
     }
     
     fileprivate let ptr: CZZipRef
-    fileprivate let stream: ArchiveStream
+    fileprivate let stream: ZipStream
     fileprivate let encoding: String.Encoding
 
     public convenience init(toMemory: (), entryNameEncoding encoding: String.Encoding = .utf8) {
-        self.init(stream: ArchiveStream(toMemory: ()), entryNameEncoding: encoding)
+        self.init(stream: ZipStream(toMemory: ()), entryNameEncoding: encoding)
     }
     
     public convenience init?(toFileAtPath path: String, entryNameEncoding encoding: String.Encoding = .utf8) {
-        guard let stream = ArchiveStream(fileAtPath: path, mode: .write) else {
+        guard let stream = ZipStream(fileAtPath: path, mode: .write) else {
             return nil
         }
         self.init(stream: stream, entryNameEncoding: encoding)
     }
 
-    public init(stream: ArchiveStream, entryNameEncoding encoding: String.Encoding = .utf8) {
+    public init(stream: ZipStream, entryNameEncoding encoding: String.Encoding = .utf8) {
         self.ptr = CZZipCreate(stream.ptr)
         self.stream = stream
         self.encoding = encoding
@@ -63,9 +63,22 @@ public class Zip {
         CZZipRelease(ptr)
     }
     
-    public func appendEntry(_ entryName: String, method: CompressionMethod = .deflate, level: CompressionLevel = .optimal, password: String? = nil, crc32: UInt32 = 0, writeBlock: ((Entry) throws -> Void)) rethrows {
-        // 引数: 日付、パーミッション、ディレクトリかどうか
-        // TODO: ディレクトリの場合の考慮
+    public func appendEntry(_ entryName: String, isDirectory: Bool = false, method: CompressionMethod = .deflate, level: CompressionLevel = .optimal, password: String? = nil, crc32: UInt32 = 0, writeBlock: ((Entry) throws -> Void)) rethrows {
+        // 引数: 日付、パーミッション
+        
+        var entryName = entryName
+        var method = method
+        var level = level
+        var password = password
+        
+        if isDirectory {
+            if !entryName.hasSuffix("/") {
+                entryName += "/"
+            }
+            method = .store
+            level = .noCompression
+            password = nil
+        }
         
         // FIXME:
         let time = ZipArchiveDateTime(year: 2017, month: 1, day: 2, hour: 3, minute: 4, second: 5)

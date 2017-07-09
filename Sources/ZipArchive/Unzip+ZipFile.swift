@@ -9,58 +9,12 @@
 import Foundation
 
 extension Unzip {
-    
-    private func createBaseDirectory(root: String, subpath: String) throws {
-        var path = subpath
-        var baseURL = URL(fileURLWithPath: root)
-        
-        if let range = path.range(of: "/", options: .backwards) {
-            path = path.substring(to: range.lowerBound)
-            baseURL = baseURL.appendingPathComponent(path)
-        }
-        
-        let fm = FileManager.default
-        if !fm.fileExists(atPath: baseURL.path) {
-            try fm.createDirectory(atPath: baseURL.path, withIntermediateDirectories: true, attributes: nil)
-        }
-    }
-    
-    private func extractDirectory(_ entry: Unzip.Entry, root: String) throws {
-        let fullURL = URL(fileURLWithPath: root).appendingPathComponent(entry.name)
-        
-        let fm = FileManager.default
-        if !fm.fileExists(atPath: fullURL.path) {
-            try fm.createDirectory(atPath: fullURL.path, withIntermediateDirectories: true, attributes: nil)
-        }
-    }
-    
-    private func extractFile(_ entry: Unzip.Entry, root: String, password: String?) throws {
-        let fullURL = URL(fileURLWithPath: root).appendingPathComponent(entry.name)
-        try createBaseDirectory(root: root, subpath: entry.name)
-        try entry.extract(toFileAtPath: fullURL.path, overwrite: false, password: password)
-    }
-    
-    //private func extractSymlink(_ entry: Unzip.Entry, root: String) throws {
-        //let fullURL = URL(fileURLWithPath: root).appendingPathComponent(entry.fileName)
-        
-        //        let fullPath = directory.appendingPathComponent(entry.fullName)
-        //        let data = try entry.extractToData()
-        //        guard let destination = String(data: data, encoding: .utf8) else {
-        //            throw ZipError.io
-        //        }
-        //
-        //        try createBaseDirectory(entry)
-        //
-        //        try fm.createSymbolicLink(atPath: fullPath, withDestinationPath: destination)
-    //}
-    
+
     public func extract(toDirectoryAtPath path: String, password: String? = nil) throws {
+        let dirURL = URL(fileURLWithPath: path, isDirectory: true)
         try self.enumerateEntries { (entry, _) in
-            if entry.isDirectory {
-                try extractDirectory(entry, root: path)
-            } else {
-                try extractFile(entry, root: path, password: password)
-            }
+            let url = dirURL.appendingPathComponent(entry.name, isDirectory: entry.isDirectory)
+            try entry.extract(toFileAtPath: url.path, overwrite: false, password: password)
         }
     }
     
@@ -72,9 +26,9 @@ extension Unzip.Entry {
         var data = Data()
         var _buffer = [UInt8](repeating: 0, count: DefaultBufferSize)
         try _buffer.withUnsafeMutableBufferPointer { (buffer) -> Void in
-            try self.extract(password: password) { (reader) in
+            try self.extract(password: password) { (fileReader) in
                 while true {
-                    let readLen = reader.read(buffer.baseAddress!, count: buffer.count)
+                    let readLen = fileReader.read(buffer.baseAddress!, count: buffer.count)
                     if readLen < 0 {
                         throw ZipError.io
                     }
@@ -87,17 +41,30 @@ extension Unzip.Entry {
         }
         return data
     }
-
+    
     public func extract(toFileAtPath path: String, overwrite: Bool = false, password: String? = nil) throws {
+        let url = URL(fileURLWithPath: path, isDirectory: self.isDirectory)
         let fileManager = FileManager.default
         
-        if fileManager.fileExists(atPath: path) {
-            if !overwrite {
-                throw ZipError.io
+        if self.isDirectory {
+            if !fileManager.fileExists(atPath: url.path) {
+                try fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            }
+            return
+        } else {
+            if fileManager.fileExists(atPath: url.path) {
+                if !overwrite {
+                    throw ZipError.io
+                }
+            }
+            
+            let dirURL = url.deletingLastPathComponent()
+            if !fileManager.fileExists(atPath: dirURL.path) {
+                try fileManager.createDirectory(at: dirURL, withIntermediateDirectories: true, attributes: nil)
             }
         }
 
-        guard let stream = OutputStream(toFileAtPath: path, append: false) else {
+        guard let stream = OutputStream(url: url, append: false) else {
             throw ZipError.io
         }
         stream.open()
@@ -109,9 +76,9 @@ extension Unzip.Entry {
         let len = try _buffer.withUnsafeMutableBufferPointer { (buffer) -> Int in
             var totalLen = 0
             
-            try self.extract(password: password) { (reader) in
+            try self.extract(password: password) { (fileReader) in
                 while true {
-                    let readLen = reader.read(buffer.baseAddress!, count: buffer.count)
+                    let readLen = fileReader.read(buffer.baseAddress!, count: buffer.count)
                     if readLen < 0 {
                         throw ZipError.io
                     }
@@ -136,5 +103,5 @@ extension Unzip.Entry {
             throw ZipError.invalidData
         }
     }
-    
+
 }

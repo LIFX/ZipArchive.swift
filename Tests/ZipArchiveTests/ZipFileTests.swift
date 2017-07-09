@@ -3,7 +3,7 @@
 //  ZipArchive
 //
 //  Created by Yasuhiro Hatta on 2017/06/14.
-//
+//  Copyright © 2017 yaslab. All rights reserved.
 //
 
 import Foundation
