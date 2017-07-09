@@ -68,6 +68,48 @@ class ZipZipFileTests: BaseTestCase {
         }
     }
     
+    func testAppendEntryFromDataWithPassword() {
+        let files: [String : Data] = [
+            "test_data1.dat" : createFixedData(),
+            "subdir/test_data2.dat" : createRandomData(),
+            "subdir/" : createRandomData(size: 0)
+        ]
+        
+        let archiveFile = zipDestinationDirectory + "test.zip"
+        let archive = Zip(toFileAtPath: archiveFile)!
+        let password = "abcde"
+        
+        for fileName in files.keys {
+            let data = files[fileName]!
+            let isDirectory = fileName.hasSuffix("/")
+            try! archive.appendEntry(fromData: data, entryName: fileName, isDirectory: isDirectory, password: password)
+        }
+        
+        archive.close()
+        
+        let ret = executeCommand(
+            command: "/usr/bin/unzip",
+            arguments: ["-d", unzipDestinationDirectory, "-P", password, archiveFile],
+            workingDirectory: nil
+        )
+        XCTAssertEqual(0, ret)
+        
+        for fileName in files.keys {
+            let unzipTestDataFile = unzipDestinationDirectory + fileName
+            let isDirectory = fileName.hasSuffix("/")
+            if isDirectory {
+                var flag: ObjCBool = false
+                let exist = FileManager.default.fileExists(atPath: unzipTestDataFile, isDirectory: &flag)
+                XCTAssertTrue(exist)
+                XCTAssertTrue(flag.boolValue)
+            } else {
+                let unzipTestData = try! Data(contentsOf: URL(fileURLWithPath: unzipTestDataFile))
+                let data = files[fileName]!
+                XCTAssertEqual(data, unzipTestData)
+            }
+        }
+    }
+    
     func testExtractToFile() {
         let files: [String : Data] = [
             "test_data1.dat" : createFixedData(),

@@ -78,6 +78,10 @@ public class Unzip {
         }
         
         public func extract(password: String? = nil, decompressFactory: DecompressFactory? = nil, readBlock: ((EntryReader) throws -> Void)) rethrows {
+            var password = password
+            if self.isDirectory {
+                password = nil
+            }
             self.open(password: password, decompressFactory: decompressFactory)
             defer { self.close() }
             try readBlock(EntryReader(ptr, crc32: globalHeader.crc))

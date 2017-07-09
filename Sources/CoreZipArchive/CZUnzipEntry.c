@@ -166,11 +166,13 @@ void CZUnzipEntryOpen(CZUnzipEntryRef obj, const char * password, CZDecompressFa
     
     CZCryptoRef crypto = NULL;
     if (password) {
-        crypto = CZCryptoCreate(password);
-        uint8_t cryptoHeader[CZCryptoHeaderSize];
-        CZStreamRead(stream, cryptoHeader, CZCryptoHeaderSize);
-        for (int32_t i = 0; i < CZCryptoHeaderSize; i += 1) {
-            /*uint8_t x = */CZCryptoDecode(crypto, cryptoHeader[i]);
+        if (globalInfo.compressedSize >= CZCryptoHeaderSize) {
+            crypto = CZCryptoCreate(password);
+            uint8_t cryptoHeader[CZCryptoHeaderSize];
+            CZStreamRead(stream, cryptoHeader, CZCryptoHeaderSize);
+            for (int32_t i = 0; i < CZCryptoHeaderSize; i += 1) {
+                /*uint8_t x = */CZCryptoDecode(crypto, cryptoHeader[i]);
+            }
         }
     }
     CZStreamAttachCrypto(stream, crypto);
