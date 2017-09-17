@@ -284,7 +284,7 @@ void CZUnzipResetIterator(CZUnzipRef unzip) {
     unzip->currentHeaderOffset = 0;
 }
 
-bool CZUnzipMoveNextEntry(CZUnzipRef unzip) {
+bool CZUnzipMoveToNextEntry(CZUnzipRef unzip) {
     CZEndOfCentralDirectoryRecordInfo info = CZEndOfCentralDirectoryRecordGetInfo(unzip->endOfCentralDirectoryRecord);
     
     if (unzip->currentHeader == NULL) {
@@ -310,6 +310,26 @@ bool CZUnzipMoveNextEntry(CZUnzipRef unzip) {
     unzip->currentHeaderSize = headerSize;
     
     return true;
+}
+
+bool CZUnzipMoveToSpecifiedNameEntry(CZUnzipRef unzip, const char * fileName) {
+    bool fileFound = false;
+    
+    CZUnzipResetIterator(unzip);
+    while (CZUnzipMoveToNextEntry(unzip)) {
+        swift_int_t len = CZEntryHeaderGetFileNameLength(unzip->currentHeader);
+        char * name = malloc(len + 1);
+        CZEntryHeaderGetFileName(unzip->currentHeader, name, len + 1);
+        if (strcmp(fileName, name) == 0) {
+            fileFound = true;
+        }
+        free(name);
+        if (fileFound) {
+            break;
+        }
+    }
+    
+    return fileFound;
 }
 
 const CZEntryHeaderRef CZUnzipGetCurrentGlobalHeader(const CZUnzipRef obj) {
