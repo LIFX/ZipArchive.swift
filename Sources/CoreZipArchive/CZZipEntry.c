@@ -192,6 +192,9 @@ static inline bool _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t h
         }
     }
     
+    // fileComment
+    // (nothing)
+    
     return true;
 }
 
