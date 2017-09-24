@@ -36,10 +36,7 @@ swift_int_t _CZDecompressDeflateRead(CZStreamRef stream, uint8_t * buffer, swift
             extra->strm.next_in = extra->buffer;
             extra->strm.avail_in = (uInt)size;
         }
-#if HAS_DEFLATE
-        // FIXME:
         status = inflate(&extra->strm, Z_NO_FLUSH);
-#endif
         if (status == Z_STREAM_END) {
             extra->isStreamEnd = true;
             break;
@@ -65,10 +62,7 @@ swift_int_t _CZDecompressDeflateRead(CZStreamRef stream, uint8_t * buffer, swift
 void _CZDecompressDeflateRelease(void * opaque) {
     CZDecompressDeflate * extra = opaque;
     if (extra) {
-#if HAS_DEFLATE
-        // FIXME:
         inflateEnd(&extra->strm);
-#endif
         if (extra->buffer) {
             free(extra->buffer);
         }
@@ -77,15 +71,12 @@ void _CZDecompressDeflateRelease(void * opaque) {
 }
 
 CZDecompressRef CZDecompressDeflateCreate(CZStreamRef stream, swift_int_t bufferSize) {
-    int32_t status = Z_OK;
     CZDecompressDeflate * extra = calloc(1, sizeof(CZDecompressDeflate));
-#if HAS_DEFLATE
-    // FIXME:
-    status = inflateInit2(&extra->strm, -MAX_WBITS);
-#endif
+
+    int32_t status = inflateInit2(&extra->strm, -MAX_WBITS);
     if (status != Z_OK) {
-        // TODO: free
-        //return NULL;
+        free(extra);
+        return NULL;
     }
 
     extra->isStreamEnd = false;
@@ -97,4 +88,3 @@ CZDecompressRef CZDecompressDeflateCreate(CZStreamRef stream, swift_int_t buffer
 
     return decompress;
 }
-

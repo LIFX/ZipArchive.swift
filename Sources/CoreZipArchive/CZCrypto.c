@@ -43,10 +43,7 @@ static inline uint8_t _CZCryptoDecryptByte(CZCryptoRef obj) {
 
 CZCryptoRef CZCryptoCreate(const char * password) {
     CZCryptoRef obj = calloc(1, sizeof(struct CZCrypto));
-#if HAS_DEFLATE
-    // FIXME:
     obj->crc32Table = get_crc_table();
-#endif
     obj->keys[0] = 305419896;
     obj->keys[1] = 591751049;
     obj->keys[2] = 878082192;

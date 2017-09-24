@@ -61,10 +61,7 @@ void CZCompressSetExtraData(CZCompressRef obj, void * opaque) {
 }
 
 swift_int_t CZCompressWrite(CZCompressRef obj, const uint8_t * buffer, swift_int_t length) {
-#if HAS_DEFLATE
-    // FIXME:
     obj->crc32 = (uint32_t)crc32(obj->crc32, buffer, (uint32_t)length);
-#endif
     return obj->write(obj->stream, buffer, length, obj->extraData);
 }
 
