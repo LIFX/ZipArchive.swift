@@ -52,13 +52,13 @@ TBD
 ### Carthage
 
 ```
-github "yaslab/ZipArchive.swift" ~> 0.1
+github "yaslab/ZipArchive.swift" ~> 0.2.0
 ```
 
 ### Swift Package Manager
 
 ```
-.package(url: "https://github.com/yaslab/ZipArchive.swift.git", from: "0.1.0")
+.package(url: "https://github.com/yaslab/ZipArchive.swift.git", .upToNextMinor(from: "0.2.0"))
 ```
 
 ## License

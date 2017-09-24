@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'ZipArchive.swift'
-  s.version = '0.1.0'
+  s.version = '0.2.0'
   s.summary = 'Zip archiving library written in Swift and C.'
   s.homepage = 'https://github.com/yaslab/ZipArchive.swift'
   s.license = 'MIT'
