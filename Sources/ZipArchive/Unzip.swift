@@ -149,7 +149,7 @@ public class Unzip {
 extension Unzip: IteratorProtocol, Sequence {
     
     public func next() -> Entry? {
-        guard CZUnzipMoveNextEntry(ptr) else {
+        guard CZUnzipMoveToNextEntry(ptr) else {
             return nil
         }
         let entry = CZUnzipGetCurrentEntry(ptr)!

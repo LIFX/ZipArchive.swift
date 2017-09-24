@@ -21,6 +21,8 @@ struct CZUnzipEntry {
     //CZEntryHeaderRef globalHeader;
     
     CZUnzipRef unzip;
+    
+    char * fileName;
 
     CZEntryHeaderRef localHeader;
     size_t localHeaderSize;
@@ -134,13 +136,24 @@ static inline CZEntryHeaderRef _CZUnzipEntryReadLocalHeader(CZStreamRef stream, 
 
 CZUnzipEntryRef CZUnzipEntryCreate(CZUnzipRef unzip) {
     CZUnzipEntryRef obj = calloc(1, sizeof(struct CZUnzipEntry));
+    
     obj->unzip = unzip;
+    
+    CZEntryHeaderRef globalHeader = CZUnzipGetCurrentGlobalHeader(unzip);
+    swift_int_t fileNameLength = CZEntryHeaderGetFileNameLength(globalHeader);
+    obj->fileName = malloc(fileNameLength + 1);
+    CZEntryHeaderGetFileName(globalHeader, obj->fileName, fileNameLength + 1);
+    
     return obj;
 }
 
 // MARK: - public
 
 void CZUnzipEntryRelease(CZUnzipEntryRef obj) {
+    if (obj->fileName) {
+        free(obj->fileName);
+        obj->fileName = NULL;
+    }
     if (obj->localHeader) {
         CZEntryHeaderRelease(obj->localHeader);
         obj->localHeader = NULL;
@@ -153,6 +166,10 @@ void CZUnzipEntryRelease(CZUnzipEntryRef obj) {
 }
 
 void CZUnzipEntryOpen(CZUnzipEntryRef obj, const char * password, CZDecompressFactoryFunc decompressFactory) {
+    if (!CZUnzipMoveToSpecifiedNameEntry(obj->unzip, obj->fileName)) {
+        // TODO: Entry not found.
+    }
+    
     CZEntryHeaderRef globalHeader = CZUnzipGetCurrentGlobalHeader(obj->unzip);
     CZEntryHeaderInfo globalInfo = CZEntryHeaderGetInfo(globalHeader);
     

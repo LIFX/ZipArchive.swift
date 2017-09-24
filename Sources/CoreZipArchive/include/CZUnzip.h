@@ -26,7 +26,8 @@ const CZEndOfCentralDirectoryRecordRef _Nullable CZUnzipGetEndOfCentralDirectory
 // MARK: - Iterator
 
 void CZUnzipResetIterator(CZUnzipRef _Nonnull unzip);
-bool CZUnzipMoveNextEntry(CZUnzipRef _Nonnull unzip);
+bool CZUnzipMoveToNextEntry(CZUnzipRef _Nonnull unzip);
+bool CZUnzipMoveToSpecifiedNameEntry(CZUnzipRef _Nonnull unzip, const char * _Nonnull fileName);
 
 const CZEntryHeaderRef _Nullable CZUnzipGetCurrentGlobalHeader(const CZUnzipRef _Nonnull obj);
 CZUnzipEntryRef _Nullable CZUnzipGetCurrentEntry(CZUnzipRef _Nonnull unzip);
