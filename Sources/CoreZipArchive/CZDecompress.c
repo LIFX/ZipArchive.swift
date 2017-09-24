@@ -73,15 +73,16 @@ CZDecompressRef CZDecompressDefaultFactory(CZEntryHeaderInfo info, CZStreamRef s
     switch (info.method) {
         case 0:
             obj = CZDecompressStoreCreate(stream, info.size);
-            obj->method = info.method;
             break;
         case Z_DEFLATED:
             obj = CZDecompressDeflateCreate(stream, CZDefaultBufferSize);
-            obj->method = info.method;
             break;
         default:
             // Unsupported compression method
             break;
+    }
+    if (obj) {
+        obj->method = info.method;
     }
     return obj;
 }

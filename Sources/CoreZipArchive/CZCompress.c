@@ -82,15 +82,16 @@ CZCompressRef CZCompressDefaultFactory(swift_int_t method, swift_int_t level, CZ
     switch (method) {
         case 0:
             obj = CZCompressStoreCreate(stream);
-            obj->method = method;
             break;
         case Z_DEFLATED:
             obj = CZCompressDeflateCreate(stream, level, CZDefaultBufferSize);
-            obj->method = method;
             break;
         default:
             // Unsupported compression method
             break;
+    }
+    if (obj) {
+        obj->method = method;
     }
     return obj;
 }

@@ -21,6 +21,6 @@ swift_int_t CZZipEntryWrite(CZZipEntryRef _Nonnull obj, const uint8_t * _Nonnull
 
 uint32_t CZZipGetCRC32(CZZipEntryRef _Nonnull obj);
 
-void CZZipEntryClose(CZZipEntryRef _Nonnull obj);
+bool CZZipEntryClose(CZZipEntryRef _Nonnull obj);
 
 #endif /* CZZipEntry_h */

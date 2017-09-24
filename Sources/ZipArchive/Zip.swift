@@ -27,13 +27,16 @@ public class Zip {
             return CZZipEntryWrite(ptr, buffer, count)
         }
         
-        fileprivate func close() {
+        fileprivate func close() throws {
+            // flush
             var dummy: UInt8 = 0
-            let ret = write(&dummy, count: 0) // flush
-            if ret != 0 {
-                // ERROR
+            if write(&dummy, count: 0) != 0 {
+                throw ZipError.io
             }
-            CZZipEntryClose(ptr)
+            
+            if !CZZipEntryClose(ptr) {
+                throw ZipError.io
+            }
         }
         
     }
@@ -63,7 +66,7 @@ public class Zip {
         CZZipRelease(ptr)
     }
     
-    public func appendEntry(_ entryName: String, isDirectory: Bool = false, method: CompressionMethod = .deflate, level: CompressionLevel = .optimal, password: String? = nil, crc32: UInt32 = 0, writeBlock: ((Entry) throws -> Void)) rethrows {
+    public func appendEntry(_ entryName: String, isDirectory: Bool = false, method: CompressionMethod = .deflate, level: CompressionLevel = .optimal, password: String? = nil, crc32: UInt32 = 0, writeBlock: ((Entry) throws -> Void)) throws {
         // 引数: 日付、パーミッション
         
         var entryName = entryName
@@ -84,27 +87,37 @@ public class Zip {
         let time = ZipArchiveDateTime(year: 2017, month: 1, day: 2, hour: 3, minute: 4, second: 5)
         
         guard let cstrName = entryName.cString(using: encoding) else {
-            // FIXME: 
-            fatalError()
+            throw ZipError.stringEncodingMismatch
         }
 
         var cstrPass: [CChar]? = nil
         if let password = password {
             guard let cstr = password.cString(using: .ascii) else {
-                // FIXME:
-                fatalError()
+                throw ZipError.stringEncodingMismatch
             }
             guard cstr.count > 0 else {
-                // FIXME:
-                //throw ...
-                fatalError()
+                throw ZipError.invalidData
             }
             cstrPass = cstr
         }
 
         let entry = Entry(CZZipAppendEntry(ptr, cstrName, method.rawValue, time, level.rawValue, nil, cstrPass, crc32))
-        defer { entry.close() }
-        try writeBlock(entry)
+        var e: Error? = nil
+        do {
+            try writeBlock(entry)
+        } catch {
+            e = error
+        }
+        do {
+            try entry.close()
+        } catch {
+            if e == nil {
+                e = error
+            }
+        }
+        if let error = e {
+            throw error
+        }
     }
     
     public func close() {
