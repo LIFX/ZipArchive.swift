@@ -4,6 +4,9 @@ import PackageDescription
 
 let package = Package(
     name: "ZipArchive",
+    products: [
+        .library(name: "ZipArchive", targets: ["ZipArchive"]),
+    ],
     targets: [
         .target(name: "ZipArchive", dependencies: ["CoreZipArchive"]),
         .target(name: "CoreZipArchive"),
