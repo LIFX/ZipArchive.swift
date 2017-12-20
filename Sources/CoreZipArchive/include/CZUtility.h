@@ -23,8 +23,6 @@
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 #define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
 
-#define HAS_DEFLATE 1
-
 extern swift_int_t CZDefaultBufferSize;
 
 #endif /* CZUtility_h */

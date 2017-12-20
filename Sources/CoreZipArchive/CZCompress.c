@@ -61,10 +61,7 @@ void CZCompressSetExtraData(CZCompressRef obj, void * opaque) {
 }
 
 swift_int_t CZCompressWrite(CZCompressRef obj, const uint8_t * buffer, swift_int_t length) {
-#if HAS_DEFLATE
-    // FIXME:
     obj->crc32 = (uint32_t)crc32(obj->crc32, buffer, (uint32_t)length);
-#endif
     return obj->write(obj->stream, buffer, length, obj->extraData);
 }
 
@@ -85,15 +82,16 @@ CZCompressRef CZCompressDefaultFactory(swift_int_t method, swift_int_t level, CZ
     switch (method) {
         case 0:
             obj = CZCompressStoreCreate(stream);
-            obj->method = method;
             break;
         case Z_DEFLATED:
             obj = CZCompressDeflateCreate(stream, level, CZDefaultBufferSize);
-            obj->method = method;
             break;
         default:
             // Unsupported compression method
             break;
+    }
+    if (obj) {
+        obj->method = method;
     }
     return obj;
 }

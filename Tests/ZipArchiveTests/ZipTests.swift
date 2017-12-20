@@ -41,16 +41,20 @@ class ZipTests: BaseTestCase {
         let archiveFile = zipDestinationDirectory + "test.zip"
         let archive = Zip(toFileAtPath: archiveFile)!
         
-        for fileName in files.keys {
-            let data = files[fileName]!
-            let length = data.count
-            archive.appendEntry(fileName, level: .default) { (entry) in
-                data.withUnsafeBytes { (buffer) -> Void in
-                    _ = entry.write(buffer, count: length)
+        do {
+            for fileName in files.keys {
+                let data = files[fileName]!
+                let length = data.count
+                try archive.appendEntry(fileName, level: .default) { (entry) in
+                    data.withUnsafeBytes { (buffer) -> Void in
+                        _ = entry.write(buffer, count: length)
+                    }
                 }
             }
+        } catch {
+            XCTFail(error.localizedDescription)
         }
-            
+
         archive.close()
         
         let ret = executeCommand(
@@ -76,14 +80,18 @@ class ZipTests: BaseTestCase {
         let archiveFile = zipDestinationDirectory + "test.zip"
         let archive = Zip(toFileAtPath: archiveFile)!
         
-        for fileName in files.keys {
-            let data = files[fileName]!
-            let length = data.count
-            archive.appendEntry(fileName, method: .store) { (entry) in
-                data.withUnsafeBytes { (buffer) -> Void in
-                    _ = entry.write(buffer, count: length)
+        do {
+            for fileName in files.keys {
+                let data = files[fileName]!
+                let length = data.count
+                try archive.appendEntry(fileName, method: .store) { (entry) in
+                    data.withUnsafeBytes { (buffer) -> Void in
+                        _ = entry.write(buffer, count: length)
+                    }
                 }
             }
+        } catch {
+            XCTFail(error.localizedDescription)
         }
         
         archive.close()
@@ -119,14 +127,18 @@ class ZipTests: BaseTestCase {
         let archiveFile = zipDestinationDirectory + "test.zip"
         let archive = Zip(toFileAtPath: archiveFile)!
         
-        for fileName in files.keys {
-            let data = files[fileName]!
-            let length = data.count
-            archive.appendEntry(fileName, level: .optimal) { (entry) in
-                data.withUnsafeBytes { (buffer) -> Void in
-                    _ = entry.write(buffer, count: length)
+        do {
+            for fileName in files.keys {
+                let data = files[fileName]!
+                let length = data.count
+                try archive.appendEntry(fileName, level: .optimal) { (entry) in
+                    data.withUnsafeBytes { (buffer) -> Void in
+                        _ = entry.write(buffer, count: length)
+                    }
                 }
             }
+        } catch {
+            XCTFail(error.localizedDescription)
         }
         
         archive.close()

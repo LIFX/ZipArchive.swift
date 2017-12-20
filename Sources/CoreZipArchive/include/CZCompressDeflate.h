@@ -13,6 +13,6 @@
 
 #include <zlib.h>
 
-CZCompressRef _Nonnull CZCompressDeflateCreate(CZStreamRef _Nonnull stream, swift_int_t level, swift_int_t bufferSize);
+CZCompressRef _Nullable CZCompressDeflateCreate(CZStreamRef _Nonnull stream, swift_int_t level, swift_int_t bufferSize);
 
 #endif /* CZCompressDeflate_h */

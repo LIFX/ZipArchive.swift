@@ -53,4 +53,3 @@ CZCompressRef CZCompressStoreCreate(CZStreamRef stream) {
     
     return compress;
 }
-

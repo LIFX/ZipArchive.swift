@@ -218,5 +218,3 @@ uint32_t CZUnzipGetCRC32(CZUnzipEntryRef obj) {
 const CZEntryHeaderRef CZUnzipEntryGetLocalHeader(const CZUnzipEntryRef obj) {
     return obj->localHeader;
 }
-
-

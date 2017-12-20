@@ -101,13 +101,10 @@ static inline void _CZZipEntryWriteHeader(CZStreamRef stream, CZEntryHeaderRef h
 //    CZStreamWrite(stream, buffer, offset);
 //}
 
-static inline void _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t headerOffset, CZEntryHeaderRef localHeader, CZDataDescriptor footer) {
-    
+static inline bool _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t headerOffset, CZEntryHeaderRef localHeader, CZDataDescriptor footer) {
     const uint16_t fileNameLength = CZEntryHeaderGetFileNameLength(localHeader);
     char fileName[fileNameLength + 1];
     CZEntryHeaderGetFileName(localHeader, fileName, fileNameLength + 1);
-    //CZDataRef fileName = CZLocalHeaderGetFileName(localHeader);
-    //uint16_t fileNameLength = CZDataGetCount(fileName);
 
     {
         uint8_t buffer[128];
@@ -116,7 +113,6 @@ static inline void _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t h
         offset += CZBinaryWriteUInt32LE(buffer + offset, CZGlobalHeaderSignature);
         
         CZEntryHeaderInfo localInfo = CZEntryHeaderGetInfo(localHeader);
-        //offset += CZBinaryWriteUInt16LE(buffer + offset, 20);
         
         *(buffer + offset) = (uint8_t)localInfo.versionNeededToExtract;
         offset += 1;
@@ -137,7 +133,6 @@ static inline void _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t h
         offset += CZBinaryWriteUInt16LE(buffer + offset, fileNameLength);
 
         // extraFieldLength
-        //size_t extraFieldLengthOffset = offset;
         offset += CZBinaryWriteUInt16LE(buffer + offset, 0);
 
         // fileCommentLength
@@ -157,17 +152,15 @@ static inline void _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t h
         
         size_t len = CZStreamWrite(tempStream, buffer, offset);
         if (len != offset) {
-            // TODO: ERROR
-            
+            return false;
         }
     }
     
     // fileName
     {
-        //const uint8_t * fileNameData = CZDataGetBytes(fileName);
         size_t len = CZStreamWrite(tempStream, (const uint8_t *)fileName, fileNameLength);
         if (len != fileNameLength) {
-            // TODO: error
+            return false;
         }
     }
 
@@ -189,22 +182,24 @@ static inline void _CZZipEntryWriteGlobalHeader(CZStreamRef tempStream, size_t h
             CZBinaryWriteUInt16LE(buffer + 2, dataSize);
             size_t len = CZStreamWrite(tempStream, buffer, 4);
             if (len != 4) {
-                // TODO: error
+                return false;
             }
             
             len = CZStreamWrite(tempStream, data, dataSize);
             if (len != dataSize) {
-                // TODO: error
+                return false;
             }
         }
     }
     
-    // fileComment: Nothing
+    // fileComment
+    // (nothing)
+    
+    return true;
 }
 
 // MARK: - internal
 
-//CZZipEntryRef CZZipEntryCreate(CZZipRef zip, CZLocalHeaderRef header, CZCompressRef compress, CZCryptoRef crypto, uint32_t crc32) {
 CZZipEntryRef CZZipEntryCreate(CZZipRef zip, const char * entryName, CZDateTime time, swift_int_t method, swift_int_t level, CZCompressFactoryFunc compressFactory, CZCryptoRef crypto, uint32_t crc32) {
     CZZipEntryRef obj = calloc(1, sizeof(struct CZZipEntry));
 
@@ -222,18 +217,11 @@ CZZipEntryRef CZZipEntryCreate(CZZipRef zip, const char * entryName, CZDateTime 
     localInfo.compressedSize = 0;
     localInfo.size = 0;
     
-    //CZDataRef name = CZDataCreate();
-    //CZDataAppendWithBytes(name, (const void *)entryName, strlen(entryName));
-    
     CZEntryHeaderRef header = CZEntryHeaderCreate();
     CZEntryHeaderSetInfo(header, localInfo);
     CZEntryHeaderSetFileName(header, entryName, strlen(entryName));
-    //CZEntryHeaderSetFileNameNoCopy(header, name);
-    
     obj->header = header;
     
-    //CZLocalHeaderInfo info = CZLocalHeaderGetInfo(header);
-    //CZStreamRef stream = CZZipGetStream(zip);
     obj->compress = compressFactory(method, level, stream);
     
     CZStreamSeek(stream, 0, CZStreamSeekOriginEnd);
@@ -269,7 +257,7 @@ uint32_t CZZipGetCRC32(CZZipEntryRef obj) {
     return CZCompressGetCRC32(obj->compress);
 }
 
-void CZZipEntryClose(CZZipEntryRef obj) {
+bool CZZipEntryClose(CZZipEntryRef obj) {
     CZDataDescriptor footer = {0};
     footer.crc32 = CZCompressGetCRC32(obj->compress);
     footer.compressedSize = (uint32_t)CZCompressGetCompressedSize(obj->compress);
@@ -288,14 +276,22 @@ void CZZipEntryClose(CZZipEntryRef obj) {
     offset += CZBinaryWriteUInt32LE(buffer + offset, footer.crc32);
     offset += CZBinaryWriteUInt32LE(buffer + offset, footer.compressedSize);
     offset += CZBinaryWriteUInt32LE(buffer + offset, footer.uncompressedSize);
-    CZStreamSeek(stream, obj->headerOffset + 4 + 2 + 2 + 2 + 2 + 2, CZStreamSeekOriginBegin);
-    CZStreamWrite(stream, buffer, offset);
+    if (CZStreamSeek(stream, obj->headerOffset + 4 + 2 + 2 + 2 + 2 + 2, CZStreamSeekOriginBegin) != 0) {
+        return false;
+    }
+    if (CZStreamWrite(stream, buffer, offset) != offset) {
+        return false;
+    }
+    if (CZStreamSeek(stream, 0, CZStreamSeekOriginEnd) != 0) {
+        return false;
+    }
     
-    CZStreamSeek(stream, 0, CZStreamSeekOriginEnd);
+    // Write footer
     //_CZZipEntryWriteFooter(stream, footer);
     
-    // Global Header を書き出しておく
-    //CZStreamRef tempStream = CZZipGetTempStream(obj->tmp);
+    // Write global header
     CZStreamRef tempStream = CZZipGetTempStream(obj->zip);
-    _CZZipEntryWriteGlobalHeader(tempStream, obj->headerOffset, obj->header, footer);
+    bool success = _CZZipEntryWriteGlobalHeader(tempStream, obj->headerOffset, obj->header, footer);
+    
+    return success;
 }
